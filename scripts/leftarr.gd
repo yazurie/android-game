@@ -9,7 +9,7 @@ var left = false
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if left:
 		get_parent().get_node("Bumper").motion.x = -300
 

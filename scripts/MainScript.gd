@@ -1,12 +1,12 @@
 extends Node2D
 
-var button = preload("res://Button.tscn")
+var button = preload("res://scenes/Button.tscn")
 var red = preload("res://assets/image/redB.png")
 var blue = preload("res://assets/image/blueB.png")
 var yellow = preload("res://assets/image/yellowB.png")
 var colorM
 var top = -30000
-var down = 850
+var down = 842.5
 var leftbox
 var rightbox
 var midbox
@@ -26,7 +26,7 @@ func _ready():
 	var colorchoice = [red, blue, yellow]
 	var spawnbutton = button.instance()
 	colorM = colorchoice[randi() % 3]
-	spawnbutton.position.x = 250
+	spawnbutton.position.x = 240
 	spawnbutton.position.y = down
 	spawnbutton.get_node("buttontexture").texture_normal = colorM
 	add_child(spawnbutton)
@@ -39,7 +39,7 @@ func spawn(spawnposy):
 	var spawnbutton = button.instance()
 	
 	#Top column
-	var positionx = [10, 250, 490]
+	var positionx = [0, 240, 480]
 	for _i in range(3):
 		spawnbutton = button.instance()
 		var color = colorchoice[randi() % colorchoice.size()]
@@ -52,13 +52,13 @@ func spawn(spawnposy):
 		add_child(spawnbutton)
 	for i in get_children():
 		if i.position.y < 300:
-			if i.position.x == 10:
+			if i.position.x == 0:
 				
 				leftbox = i
-			if i.position.x == 250:
+			if i.position.x == 240:
 				
 				midbox = i	
-			if i.position.x  == 490:
+			if i.position.x  == 480:
 				rightbox = i
 	
 
@@ -66,17 +66,17 @@ func _physics_process(_delta):
 	#print(Engine.get_frames_per_second())
 	if moving == true and Game1:
 		if leftbox.position.y != 50:
-			leftbox.position = lerp(leftbox.position, Vector2(10, 50), 0.4)
+			leftbox.position = lerp(leftbox.position, Vector2(0, 50), 0.4)
 		if midbox.position.y != 50:
-			midbox.position = lerp(midbox.position, Vector2(250, 50), 0.4)
+			midbox.position = lerp(midbox.position, Vector2(240, 50), 0.4)
 		if rightbox.position.y != 50:
-			rightbox.position = lerp(rightbox.position, Vector2(490, 50), 0.4)
+			rightbox.position = lerp(rightbox.position, Vector2(480, 50), 0.4)
 		if rightbox.position.y > 40:
 			if changecolor != null and dochange == true:
 				
 				print(changecolor)
 				var colorc = [red, blue, yellow]
-				var colorcc = colorc[randi() % 2]
+				var colorcc = colorc[randi() % 3]
 				changecolor.get_node("buttontexture").texture_normal = colorcc
 				colorM = colorcc
 				dochange = false
@@ -93,7 +93,7 @@ func _on_screen_respawn():
 	spawn(-30000)
 
 func _on_Timer_timeout():              #ENDS PHASE 1
-	#get_tree().reload_current_scene()
+	get_tree().reload_current_scene()
 	Game1 = false
 	finalscoreup = true
 	finalscore = get_parent().get_node("score").font.size 
@@ -115,7 +115,7 @@ func _on_final_score_timeout():
 		get_parent().get_node("score").font.size -= 2
 	if not finalscoreup and get_parent().get_node("score").font.size == finalscore:
 		get_parent().get_node("final score").stop()
-		var bump = load("res://bumper.tscn")
+		var bump = load("res://scenes/bumper.tscn")
 		var bump_instance = bump.instance()
 		bump_instance.position = Vector2(350, 1350)
 		add_child(bump_instance)

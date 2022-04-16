@@ -53,8 +53,8 @@ func _on_HpUp_timeout():
 
 func _on_spawnbutton_timeout():
 	print("ok")
-	var leftb = load("res://leftarr.tscn")
-	var rightarr = load("res://rightarr.tscn")
+	var leftb = load("res://scenes/leftarr.tscn")
+	var rightarr = load("res://scenes/rightarr.tscn")
 	var leftinst = leftb.instance()
 	var rightinst = rightarr.instance()
 	leftinst.position = Vector2(80, 760)

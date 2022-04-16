@@ -5,7 +5,7 @@ var right = false
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if right:
 		get_parent().get_node("Bumper").motion.x = 300
 

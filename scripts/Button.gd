@@ -17,9 +17,10 @@ func _physics_process(_delta):
 	moving = get_parent().moving
 	works = position.y <= 50
 	if move == true:
-		target.position = lerp(target.position, Vector2(250, 850), 0.2)
+		target.position = lerp(target.position, Vector2(240, 842.5), 0.2)
 		
 		if target.position.y > 849.4:
+			position.x = 240
 			
 			move = false
 			get_parent().moving = true
@@ -53,6 +54,7 @@ func _on_Button_won():
 			get_parent().emit_signal("score_changed")
 			get_parent().changecolor = target
 			get_parent().dochange = true
+			get_parent().get_parent().get_node("click").play()
 			move = true
 	
 	
