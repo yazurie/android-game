@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Mobile Game"
-run/main_scene="res://screen.tscn"
+run/main_scene="res://scenes/screen.tscn"
 config/icon="res://icon.png"
 
 [display]

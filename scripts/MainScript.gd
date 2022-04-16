@@ -1,6 +1,6 @@
 extends Node2D
 
-var button = preload("res://scenes/Button.tscn")
+var button = preload("res://Button.tscn")
 var red = preload("res://assets/image/redB.png")
 var blue = preload("res://assets/image/blueB.png")
 var yellow = preload("res://assets/image/yellowB.png")
