@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MainScript.gd" type="Script" id=1]
+[ext_resource path="res://score.gd" type="Script" id=2]
+[ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=3]
+
+
+[sub_resource type="DynamicFont" id=1]
+size = 150
+font_data = ExtResource( 3 )
+
+[node name="Node" type="Node"]
+
+[node name="screen" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="score" type="Label" parent="."]
+margin_left = 321.221
+margin_top = 436.35
+margin_right = 435.221
+margin_bottom = 841.35
+custom_fonts/font = SubResource( 1 )
+text = "0
+"
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="respawn" from="screen" to="screen" method="_on_screen_respawn"]
+[connection signal="score_changed" from="screen" to="score" method="_on_screen_score_changed"]
