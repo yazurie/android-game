@@ -20,17 +20,17 @@ font_data = ExtResource( 7 )
 size = 170
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 64
 outline_size = 1
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 80
 outline_size = 2
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 size = 224
 outline_size = 2
 font_data = ExtResource( 7 )
@@ -104,7 +104,7 @@ margin_left = 310.0
 margin_top = 460.0
 margin_right = 358.0
 margin_bottom = 516.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0.784314, 0.827451, 1 )
 text = "to"
 __meta__ = {
@@ -116,7 +116,7 @@ margin_left = 290.0
 margin_top = 480.0
 margin_right = 400.0
 margin_bottom = 611.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0.92549, 0.827451, 1 )
 text = "play
 "
@@ -129,7 +129,7 @@ margin_left = 220.0
 margin_top = 312.692
 margin_right = 486.0
 margin_bottom = 490.692
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0.92549, 0.827451, 1 )
 text = "Tap"
