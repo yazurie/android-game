@@ -17,6 +17,16 @@ _global_script_class_icons={
 
 config/name="Mobile Game"
 run/main_scene="res://scenes/screen.tscn"
+config/icon="res://assets/icon/icon.png"
+
+[autoload]
+
+Globalvariables="*res://scripts/globalvariables.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 
 [display]
 

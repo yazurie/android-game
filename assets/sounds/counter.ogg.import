@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/counter.ogg-5bc3b9a668c60159499149796441f20f.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/counter.ogg"
+dest_files=[ "res://.import/counter.ogg-5bc3b9a668c60159499149796441f20f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

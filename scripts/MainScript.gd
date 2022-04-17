@@ -15,14 +15,23 @@ var changecolor
 var dochange = false
 var Score = 0
 var Game1 = true
-var finalscoreup
-var finalscore
+
 
 
 signal respawn
+signal fspawn
 signal score_changed
 
 func _ready():
+	fspawn()
+	spawn(50)
+	get_tree().paused = true
+
+func fspawn():
+	get_parent().get_node("Timer").wait_time = 3
+	get_parent().get_node("Timer").start()
+	get_parent().get_node("score").visible = true
+	get_parent().get_node("Time").visible = true
 	var colorchoice = [red, blue, yellow]
 	var spawnbutton = button.instance()
 	colorM = colorchoice[randi() % 3]
@@ -30,9 +39,6 @@ func _ready():
 	spawnbutton.position.y = down
 	spawnbutton.get_node("buttontexture").texture_normal = colorM
 	add_child(spawnbutton)
-	spawn(50)
-	get_tree().paused = true
-	print("HEYHA")
 func spawn(spawnposy):
 	
 	var colorchoice = [red, blue, yellow]
@@ -80,9 +86,9 @@ func _physics_process(_delta):
 				changecolor.get_node("buttontexture").texture_normal = colorcc
 				colorM = colorcc
 				dochange = false
-	
-	var time = get_parent().get_node("Timer").time_left
-	get_parent().get_node("Time").set_text(str(stepify(time, 0.1)))
+	if Game1:
+		var time = get_parent().get_node("Timer").time_left
+		get_parent().get_node("Time").set_text(str(stepify(time, 0.1)))
 	
 
 
@@ -93,30 +99,21 @@ func _on_screen_respawn():
 	spawn(-30000)
 
 func _on_Timer_timeout():              #ENDS PHASE 1
-	get_tree().reload_current_scene()
+	#get_tree().reload_current_scene()
+	#get_parent().get_node("Timer").queue_free()
 	Game1 = false
-	finalscoreup = true
-	finalscore = get_parent().get_node("score").font.size 
 	get_parent().get_node("Time").visible = false
 	for i in get_children():
 		i.queue_free()
 	
-	get_parent().get_node("final score").start()
 	
+	
+	var bump = load("res://scenes/bumper.tscn")
+	var bump_instance = bump.instance()
+	bump_instance.position = Vector2(350, 1350)
+	add_child(bump_instance)
 	
 
 
-func _on_final_score_timeout():
-	if finalscoreup:
-		get_parent().get_node("score").font.size += 2
-	if get_parent().get_node("score").font.size > finalscore + 20:
-		finalscoreup = false
-	if not finalscoreup and get_parent().get_node("score").font.size != finalscore:
-		get_parent().get_node("score").font.size -= 2
-	if not finalscoreup and get_parent().get_node("score").font.size == finalscore:
-		get_parent().get_node("final score").stop()
-		var bump = load("res://scenes/bumper.tscn")
-		var bump_instance = bump.instance()
-		bump_instance.position = Vector2(350, 1350)
-		add_child(bump_instance)
-	
+func _on_screen_fspawn():
+	fspawn()
