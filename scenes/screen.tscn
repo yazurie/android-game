@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=2]
@@ -8,39 +8,61 @@
 [ext_resource path="res://scripts/score.gd" type="Script" id=6]
 [ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/Font/pixel.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
+[ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=2]
 size = 200
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 128
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 170
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=5]
 size = 64
 outline_size = 1
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 80
 outline_size = 2
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 124
 outline_size = 2
 font_data = ExtResource( 8 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 763.816, 27.7356 )
 
+[sub_resource type="DynamicFont" id=9]
+size = 64
+font_data = ExtResource( 2 )
+
 [node name="Node" type="Node"]
+
+[node name="level" type="Label" parent="."]
+margin_left = 330.0
+margin_top = -5.0
+margin_right = 369.0
+margin_bottom = 59.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.156863, 0.647059, 0.921569, 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="screen" type="Node2D" parent="."]
 script = ExtResource( 5 )
@@ -53,7 +75,7 @@ margin_right = 444.0
 margin_bottom = 735.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0431373, 0.784314, 0.627451, 1 )
 text = "0
 "
@@ -63,7 +85,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Time" type="Label" parent="."]
@@ -74,7 +96,7 @@ margin_right = 445.0
 margin_bottom = 872.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.2, 0.756863, 0.709804, 1 )
 text = "10
 "
@@ -92,7 +114,7 @@ margin_left = 0.94595
 margin_top = -1.08659
 margin_right = 728.946
 margin_bottom = 1079.91
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_color_hover = Color( 0, 0.545098, 0.827451, 1 )
 action_mode = 0
@@ -110,7 +132,7 @@ margin_left = 310.0
 margin_top = 480.0
 margin_right = 379.0
 margin_bottom = 548.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0.784314, 0.827451, 1 )
 text = "to"
 __meta__ = {
@@ -122,7 +144,7 @@ margin_left = 290.0
 margin_top = 515.0
 margin_right = 443.0
 margin_bottom = 688.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0.92549, 0.827451, 1 )
 text = "play
 "
@@ -135,7 +157,7 @@ margin_left = 255.355
 margin_top = 393.302
 margin_right = 521.355
 margin_bottom = 571.302
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0.92549, 0.827451, 1 )
 text = "tap"
@@ -148,7 +170,7 @@ __meta__ = {
 [node name="leftwall" type="CollisionShape2D" parent="left"]
 position = Vector2( -30, 316.101 )
 rotation = 1.5708
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 one_way_collision = true
 
 [node name="right" type="StaticBody2D" parent="."]
@@ -156,8 +178,24 @@ one_way_collision = true
 [node name="leftwall" type="CollisionShape2D" parent="right"]
 position = Vector2( 750, 316.101 )
 rotation = -1.5708
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 one_way_collision = true
+
+[node name="coin" type="Sprite" parent="."]
+position = Vector2( 17.9639, 398.999 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="coin"]
+anchor_right = 0.871
+margin_left = 42.7262
+margin_top = -33.6674
+margin_right = -24.3738
+margin_bottom = 17.3326
+custom_fonts/font = SubResource( 9 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="fspawn" from="screen" to="screen" method="_on_screen_fspawn"]
 [connection signal="respawn" from="screen" to="screen" method="_on_screen_respawn"]
 [connection signal="score_changed" from="screen" to="score" method="_on_screen_score_changed"]

@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 var damage
 
+
 func _ready():
 	damage = get_parent().get_node("Bumper").damage
 
@@ -18,15 +19,13 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_Area2D_body_entered(body):
 	body.hp -= 1
 	body.get_node("Label").set_text(str(body.hp))
-	if body.hp < 1:
-		body.get_parent().Game1 = true
-		body.get_parent().emit_signal("respawn")
-		body.get_parent().emit_signal("fspawn")
-		body.get_parent().get_parent().get_node("click").set_stream(load("res://assets/sounds/click.ogg"))
-		body.get_parent().get_parent().get_node("click").pitch_scale = 2
-		body.get_parent().get_node("Bumper").queue_free()
-		body.get_parent().get_node("leftarr").queue_free()
-		body.get_parent().get_node("rightarr").queue_free()
-		#get_parent()
-		body.queue_free()
 	queue_free()
+	if body.hp < 1:
+		body.get_node("CollisionShape2D").queue_free()
+		Globalvariables.level += 1
+		print(typeof(Globalvariables.savegame_data.Coins))
+		Globalvariables.savegame_data.Coins += float(body.starthp) / 10
+		Globalvariables.savegame_data.Coins = stepify(Globalvariables.savegame_data.Coins, 0.1)
+		Globalvariables.save_data()
+		get_parent().get_parent().get_node("coin/Label").set_text(str(Globalvariables.savegame_data.Coins))
+		body.get_node("DeadTimer").start()

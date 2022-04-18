@@ -9,6 +9,8 @@ radius = 51.6571
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
 [node name="enemy" type="KinematicBody2D"]
@@ -35,3 +37,7 @@ text = "8"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DeadTimer" type="Timer" parent="."]
+wait_time = 0.1
+[connection signal="timeout" from="DeadTimer" to="." method="_on_DeadTimer_timeout"]

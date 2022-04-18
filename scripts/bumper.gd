@@ -8,10 +8,12 @@ var motion = Vector2()
 var totalscore = 0
 var hpmultiplier = 1
 
-onready var globalvar = get_node("/root/Globalvariables")
+
 
 func _ready():
-	$Label.set_text(str(globalvar.BumperHp))
+	if Globalvariables.BumperHp <= 0:
+		Globalvariables.BumperHp = 5
+	$Label.set_text(str(Globalvariables.BumperHp))
 func _physics_process(_delta):
 	
 	movement()
@@ -33,59 +35,65 @@ func _physics_process(_delta):
 	if not spawn:
 		if get_parent().Score != 0 and not timerstarted:
 			totalscore = get_parent().Score
-			globalvar.corrBumperHp = globalvar.BumperHp
+			Globalvariables.corrBumperHp = Globalvariables.BumperHp
 			$Label/HpUp.start()
 			timerstarted = true
 			
 			get_parent().get_parent().get_node("click").set_stream(load("res://assets/sounds/counter.ogg"))
-			get_parent().get_parent().get_node("click").pitch_scale = 1.5
+			get_parent().get_parent().get_node("click").pitch_scale = 1.24
+			get_parent().get_parent().get_node("click").volume_db = -20
+		
 	
 
 
 
 func _on_HpUp_timeout():
-	
+	print(totalscore)
+	if totalscore == 0:
+		get_parent().get_parent().get_node("score").queue_free()
+		get_parent().get_parent().get_node("click").queue_free()
+	if Globalvariables.BumperHp <= 0:
+		Globalvariables.start = false
+		get_tree().reload_current_scene()
 	if get_parent().Score > 0:
 		get_parent().get_parent().get_node("click").play()
 		if get_parent().Score - (1 + totalscore / 100) > 0:
-			globalvar.BumperHp +=  hpmultiplier * (1 +  totalscore / 100)
+			Globalvariables.BumperHp +=  hpmultiplier * (1 +  totalscore / 100)
 			get_parent().Score -= 1 + totalscore / 100
 		else:
-			globalvar.BumperHp += get_parent().Score * 10
+			Globalvariables.BumperHp += get_parent().Score * 10
 			get_parent().Score = 0
-			get_parent().get_parent().get_node("score").visible = false
+			
 		
 		
 	if  totalscore < 0:
-		if get_parent().Score < 0 and globalvar.BumperHp > 0:
+		if get_parent().Score < 0 and Globalvariables.BumperHp > 0:
 			get_parent().get_parent().get_node("click").pitch_scale = 0.4
+			
 			get_parent().get_parent().get_node("click").play()
-		if get_parent().Score - (1 + totalscore / 100) < 0 and globalvar.BumperHp > 0:
-			globalvar.BumperHp -=  hpmultiplier * (1 +  totalscore / 100)
+		if get_parent().Score - (1 + totalscore / 100) < 0 and Globalvariables.BumperHp > 0:
+			Globalvariables.BumperHp -=  hpmultiplier * (1 +  totalscore / 100)
 			get_parent().Score += 1 + totalscore / 100
 		
-		else:
-			get_parent().Score = 0
-			globalvar.BumperHp = 1
-	$Label.set_text(str(globalvar.BumperHp))
-	print(get_parent().Score - (1 + totalscore / 100) )
+	$Label.set_text(str(Globalvariables.BumperHp))
+
 	
 	if get_parent().Score == 0:
-		globalvar.BumperHp = globalvar.corrBumperHp + totalscore
-		if globalvar.BumperHp < 0:
-			globalvar.BumperHp = 1
+		Globalvariables.BumperHp = Globalvariables.corrBumperHp + totalscore
+		if Globalvariables.BumperHp < 0:
+			Globalvariables.BumperHp = 1
 		
 		
-		$Label.set_text(str(globalvar.BumperHp))
-		#get_parent().get_parent().get_node("click").queue_free()
-		#get_parent().get_parent().get_node("score").queue_free()
+		$Label.set_text(str(Globalvariables.BumperHp))
+		
+		get_parent().get_parent().get_node("score").queue_free()
 		$Label/HpUp.stop()
 		$spawnbutton.start()
+		
 	get_parent().get_parent().get_node("score").set_text(str(get_parent().Score))
 
 
 func _on_spawnbutton_timeout():
-	print("ok")
 	var leftb = load("res://scenes/leftarr.tscn")
 	var rightarr = load("res://scenes/rightarr.tscn")
 	var leftinst = leftb.instance()
@@ -95,9 +103,9 @@ func _on_spawnbutton_timeout():
 	get_parent().add_child(leftinst)
 	get_parent().add_child(rightinst)
 	$spawnbutton.stop()
-	print(get_parent().get_children())
 	$shootdelay.start()
 	spawnenemy()
+	get_parent().get_parent().get_node("click").queue_free()
 	
 
 
@@ -115,13 +123,20 @@ func _on_shootdelay_timeout():
 
 
 func _on_Area2D_body_entered(body):
-	globalvar.BumperHp -= body.damage
-	if globalvar.BumperHp < 1:
+	Globalvariables.BumperHp -= body.damage
+	if Globalvariables.BumperHp < 1:
+		Globalvariables.level = 1
+		Globalvariables.start = false
 		get_tree().reload_current_scene()
-	$Label.set_text(str(globalvar.BumperHp))
+	$Label.set_text(str(Globalvariables.BumperHp))
 	
 
 func spawnenemy():
 	var enemy = load("res://scenes/enemy.tscn").instance()
-	enemy.position = Vector2(165,100)
+	enemy.position = Vector2(randi() % 350 + 150,randi() % 450)
+	enemy.motion.x = randi() % 400 + 300
+	enemy.jump = -100*(randi() % 4) + -800
+	enemy.gravity = -enemy.jump / 1.5
+	if randi() % 2 == 1:
+		enemy.motion.y = -enemy.motion.y
 	get_parent().add_child(enemy)

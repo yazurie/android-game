@@ -1,5 +1,6 @@
 extends Node2D
 
+var timefont = DynamicFont.new()
 var button = preload("res://scenes/Button.tscn")
 var red = preload("res://assets/image/redB.png")
 var blue = preload("res://assets/image/blueB.png")
@@ -23,15 +24,15 @@ signal fspawn
 signal score_changed
 
 func _ready():
+	
 	fspawn()
 	spawn(50)
+	get_parent().get_node("level").set_text(str(Globalvariables.level))
 	get_tree().paused = true
 
 func fspawn():
-	get_parent().get_node("Timer").wait_time = 3
+	get_parent().get_node("coin/Label").set_text(str(Globalvariables.savegame_data.Coins))
 	get_parent().get_node("Timer").start()
-	get_parent().get_node("score").visible = true
-	get_parent().get_node("Time").visible = true
 	var colorchoice = [red, blue, yellow]
 	var spawnbutton = button.instance()
 	colorM = colorchoice[randi() % 3]
@@ -39,6 +40,7 @@ func fspawn():
 	spawnbutton.position.y = down
 	spawnbutton.get_node("buttontexture").texture_normal = colorM
 	add_child(spawnbutton)
+	timefont.size = 128
 func spawn(spawnposy):
 	
 	var colorchoice = [red, blue, yellow]
@@ -80,7 +82,7 @@ func _physics_process(_delta):
 		if rightbox.position.y > 40:
 			if changecolor != null and dochange == true:
 				
-				print(changecolor)
+				
 				var colorc = [red, blue, yellow]
 				var colorcc = colorc[randi() % 3]
 				changecolor.get_node("buttontexture").texture_normal = colorcc
@@ -99,10 +101,10 @@ func _on_screen_respawn():
 	spawn(-30000)
 
 func _on_Timer_timeout():              #ENDS PHASE 1
-	#get_tree().reload_current_scene()
-	#get_parent().get_node("Timer").queue_free()
+	get_parent().get_node("Time").queue_free()
+	get_parent().get_node("Timer").queue_free()
 	Game1 = false
-	get_parent().get_node("Time").visible = false
+	
 	for i in get_children():
 		i.queue_free()
 	
@@ -117,3 +119,5 @@ func _on_Timer_timeout():              #ENDS PHASE 1
 
 func _on_screen_fspawn():
 	fspawn()
+
+

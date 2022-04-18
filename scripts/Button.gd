@@ -51,7 +51,7 @@ func _on_Button_won():
 			i.queue_free()
 		else:
 			target = i
-			get_parent().Score += 10000
+			get_parent().Score += 1
 			get_parent().emit_signal("score_changed")
 			get_parent().changecolor = target
 			get_parent().dochange = true

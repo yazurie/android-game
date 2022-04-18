@@ -21,9 +21,11 @@ func _physics_process(_delta):
 		modulate.a += 0.013
 		if modulate.a > 0.9:
 			plus = false
+	if Globalvariables.start == true:
+		get_tree().paused = false
+		get_parent().get_node("Time").visible = true
+		get_parent().get_node("score").visible = true
+		queue_free()
 
 func _on_start_pressed():
-	get_tree().paused = false
-	get_parent().get_node("Time").visible = true
-	get_parent().get_node("score").visible = true
-	queue_free()
+	Globalvariables.start = true

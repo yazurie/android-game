@@ -6,7 +6,7 @@ var maxsize = 170
 
 func _ready():
 	font = DynamicFont.new()
-	font.font_data = load("res://assets/Font/pixel font-7.ttf")
+	font.font_data = load("res://assets/Font/flappyfont.TTF")
 	font.size = 100
 	set("custom_fonts/font", font)
 
