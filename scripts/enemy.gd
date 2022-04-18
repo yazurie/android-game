@@ -12,8 +12,9 @@ var damage = 0
 func _ready():
 	var colors = ["res://assets/image/enemyblue.png","res://assets/image/enemyred.png", "res://assets/image/enemyyellow.png"]
 	$Sprite.texture = load(colors[randi() % 3])
-	damage = randi() %  Globalvariables.level + 1
-	hp = damage * 3
+	damage = randi() %  (Globalvariables.level * Globalvariables.level) + Globalvariables.level
+	hp = damage
+	damage = damage / 3
 	starthp = hp
 	$Label.set_text(str(hp))
 
@@ -22,15 +23,20 @@ func _ready():
 func _physics_process(delta):
 	if position.x < -400:
 		position.x = -400
-	if position.y > 1070:
+	
+	
+	#dead
+	if position.y > 990:
+		print("ok")
 		#motion.y = jump
-		modulate.r = 232
+		modulate.r = 250
 		modulate.g = 1
 		modulate.b = 1
 	if position.y > 1134:
 		Globalvariables.BumperHp = 5
 		Globalvariables.level = 1
 		Globalvariables.save_data()
+		Globalvariables.start = false
 		
 		get_tree().reload_current_scene()
 		

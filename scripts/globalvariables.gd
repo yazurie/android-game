@@ -5,7 +5,7 @@ const save_path = "user://saved.txt"
 var corrBumperHp = 5
 var BumperHp = 5
 var start = false
-var level = 1
+var level = 0
 
 
 

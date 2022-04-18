@@ -24,7 +24,7 @@ signal fspawn
 signal score_changed
 
 func _ready():
-	
+	Globalvariables.level += 1
 	fspawn()
 	spawn(50)
 	get_parent().get_node("level").set_text(str(Globalvariables.level))

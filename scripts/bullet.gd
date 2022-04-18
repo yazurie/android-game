@@ -21,8 +21,10 @@ func _on_Area2D_body_entered(body):
 	body.get_node("Label").set_text(str(body.hp))
 	queue_free()
 	if body.hp < 1:
+		body.hp = 0
+		body.get_node("Label").set_text(str(body.hp))
 		body.get_node("CollisionShape2D").queue_free()
-		Globalvariables.level += 1
+		
 		print(typeof(Globalvariables.savegame_data.Coins))
 		Globalvariables.savegame_data.Coins += float(body.starthp) / 10
 		Globalvariables.savegame_data.Coins = stepify(Globalvariables.savegame_data.Coins, 0.1)
