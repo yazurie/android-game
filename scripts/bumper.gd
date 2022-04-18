@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var spawn = true
-var damage = 1
+
 var timerstarted = false
 var spawnstarted = true
 var motion = Vector2()
@@ -10,7 +10,9 @@ var hpmultiplier = 1
 
 
 
+
 func _ready():
+	$shootdelay.wait_time = Globalvariables.savegame_data.shootdelay
 	if Globalvariables.BumperHp <= 0:
 		Globalvariables.BumperHp = 5
 	$Label.set_text(str(Globalvariables.BumperHp))
@@ -42,8 +44,9 @@ func _physics_process(_delta):
 			get_parent().get_parent().get_node("click").set_stream(load("res://assets/sounds/counter.ogg"))
 			get_parent().get_parent().get_node("click").pitch_scale = 1.24
 			get_parent().get_parent().get_node("click").volume_db = -20
-		
-	
+		if get_parent().Score == 0 and not timerstarted:
+			get_parent().get_parent().get_node("score").queue_free()
+			timerstarted = true
 
 
 
@@ -52,8 +55,6 @@ func _on_HpUp_timeout():
 	if totalscore == 0:
 		get_parent().get_parent().get_node("score").queue_free()
 		get_parent().get_parent().get_node("click").queue_free()
-	if Globalvariables.BumperHp <= 0:
-		Globalvariables.start = false
 		get_tree().reload_current_scene()
 	if get_parent().Score > 0:
 		get_parent().get_parent().get_node("click").play()
@@ -66,22 +67,23 @@ func _on_HpUp_timeout():
 			
 		
 		
-	if  totalscore < 0:
-		if get_parent().Score < 0 and Globalvariables.BumperHp > 0:
-			get_parent().get_parent().get_node("click").pitch_scale = 0.4
-			
-			get_parent().get_parent().get_node("click").play()
-		if get_parent().Score - (1 + totalscore / 100) < 0 and Globalvariables.BumperHp > 0:
-			Globalvariables.BumperHp -=  hpmultiplier * (1 +  totalscore / 100)
-			get_parent().Score += 1 + totalscore / 100
-		
+	if  get_parent().Score < 0:
+		get_parent().get_parent().get_node("click").pitch_scale = 0.4
+		get_parent().get_parent().get_node("click").play()
+		if get_parent().Score + (1 + abs(totalscore) / 100) < 0:
+			Globalvariables.BumperHp -= hpmultiplier * (1 + abs(totalscore) /100)
+			get_parent().Score += 1 + abs(totalscore) / 100
+		else:
+			Globalvariables.BumperHp -= get_parent().Score * 10
+			get_parent().Score = 0
+		if Globalvariables.BumperHp <= 0:
+			get_tree().reload_current_scene()
 	$Label.set_text(str(Globalvariables.BumperHp))
 
 	
 	if get_parent().Score == 0:
 		Globalvariables.BumperHp = Globalvariables.corrBumperHp + totalscore
-		if Globalvariables.BumperHp < 0:
-			Globalvariables.BumperHp = 1
+		
 		
 		
 		$Label.set_text(str(Globalvariables.BumperHp))
@@ -125,7 +127,7 @@ func _on_shootdelay_timeout():
 func _on_Area2D_body_entered(body):
 	Globalvariables.BumperHp -= body.damage
 	if Globalvariables.BumperHp < 1:
-		Globalvariables.level = 1
+		Globalvariables.level = 0
 		Globalvariables.start = false
 		get_tree().reload_current_scene()
 	$Label.set_text(str(Globalvariables.BumperHp))

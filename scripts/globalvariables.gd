@@ -1,20 +1,29 @@
 extends Node
 
-const save_path = "user://saved.txt"
+const save_path = "user://save.txt"
 
 var corrBumperHp = 5
-var BumperHp = 5
+var BumperHp 
 var start = false
-var level = 0
+var level
+var time = 10
 
 
 
 var savegame_data = {
-	"Coins": 0
+	"Coins": 0,
+	"hpmultiply": 1,                        #beginn: 1
+	"startBumpHp": 5,                       #beginn: 5
+	"shootdelay": 0.5,                      #beginn: 0.5
+	"damagelvl": 1,                         #beginn: 1
+	"penalty": 5,                           #beginn: 5
+	"startlevel": 0                         #beginn: 0
 }
 
 
 func _ready():
+	level = savegame_data.startlevel
+	BumperHp = savegame_data.startBumpHp
 	print(typeof(savegame_data.Coins))
 	load_data()
 

@@ -24,6 +24,10 @@ signal fspawn
 signal score_changed
 
 func _ready():
+	if Globalvariables.time - Globalvariables.level > 3:
+		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level
+	else:
+		get_parent().get_node("Timer").wait_time = 3
 	Globalvariables.level += 1
 	fspawn()
 	spawn(50)
@@ -33,6 +37,8 @@ func _ready():
 func fspawn():
 	get_parent().get_node("coin/Label").set_text(str(Globalvariables.savegame_data.Coins))
 	get_parent().get_node("Timer").start()
+	
+	
 	var colorchoice = [red, blue, yellow]
 	var spawnbutton = button.instance()
 	colorM = colorchoice[randi() % 3]

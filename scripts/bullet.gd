@@ -1,11 +1,10 @@
 extends KinematicBody2D
 
 
-var damage
+var damage = Globalvariables.savegame_data.damagelvl
 
 
-func _ready():
-	damage = get_parent().get_node("Bumper").damage
+
 
 func _physics_process(_delta):
 	move_and_slide(Vector2(0, -1500))
@@ -17,7 +16,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Area2D_body_entered(body):
-	body.hp -= 1
+	body.hp -= round(0.5*(damage * damage))
 	body.get_node("Label").set_text(str(body.hp))
 	queue_free()
 	if body.hp < 1:

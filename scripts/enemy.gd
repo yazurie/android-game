@@ -14,7 +14,7 @@ func _ready():
 	$Sprite.texture = load(colors[randi() % 3])
 	damage = randi() %  (Globalvariables.level * Globalvariables.level) + Globalvariables.level
 	hp = damage
-	damage = damage / 3
+	damage = 1 + (damage / 3)
 	starthp = hp
 	$Label.set_text(str(hp))
 
@@ -26,15 +26,9 @@ func _physics_process(delta):
 	
 	
 	#dead
-	if position.y > 990:
-		print("ok")
-		#motion.y = jump
-		modulate.r = 250
-		modulate.g = 1
-		modulate.b = 1
 	if position.y > 1134:
 		Globalvariables.BumperHp = 5
-		Globalvariables.level = 1
+		Globalvariables.level = 0
 		Globalvariables.save_data()
 		Globalvariables.start = false
 		

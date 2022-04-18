@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/Font/pixel.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
 [ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/image/shop.png" type="Texture" id=11]
+[ext_resource path="res://scenes/shop.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -43,10 +45,15 @@ size = 124
 outline_size = 2
 font_data = ExtResource( 8 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="DynamicFont" id=8]
+size = 48
+outline_size = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 763.816, 27.7356 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 size = 64
 font_data = ExtResource( 2 )
 
@@ -85,6 +92,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 
 [node name="Time" type="Label" parent="."]
@@ -109,10 +117,10 @@ pitch_scale = 2.0
 
 [node name="start" type="Button" parent="."]
 pause_mode = 2
-margin_left = 0.94595
-margin_top = -1.08659
-margin_right = 728.946
-margin_bottom = 1079.91
+margin_left = 1.0
+margin_top = -100.0
+margin_right = 729.0
+margin_bottom = 1170.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_color_hover = Color( 0, 0.545098, 0.827451, 1 )
@@ -164,12 +172,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="shop" type="TextureButton" parent="."]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.647059 )
+margin_left = 255.0
+margin_top = 700.0
+margin_right = 355.0
+margin_bottom = 760.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 11 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="shop"]
+margin_left = 15.6866
+margin_top = 6.88647
+margin_right = 111.687
+margin_bottom = 57.8865
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0.92549, 0.827451, 1 )
+text = "shop"
+
 [node name="left" type="StaticBody2D" parent="."]
 
 [node name="leftwall" type="CollisionShape2D" parent="left"]
 position = Vector2( -30, 316.101 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 one_way_collision = true
 
 [node name="right" type="StaticBody2D" parent="."]
@@ -177,7 +208,7 @@ one_way_collision = true
 [node name="leftwall" type="CollisionShape2D" parent="right"]
 position = Vector2( 750, 316.101 )
 rotation = -1.5708
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 one_way_collision = true
 
 [node name="coin" type="Sprite" parent="."]
@@ -190,7 +221,7 @@ margin_left = 42.7262
 margin_top = -33.6674
 margin_right = -24.3738
 margin_bottom = 17.3326
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -200,3 +231,4 @@ __meta__ = {
 [connection signal="score_changed" from="screen" to="score" method="_on_screen_score_changed"]
 [connection signal="timeout" from="Timer" to="screen" method="_on_Timer_timeout"]
 [connection signal="pressed" from="start" to="start" method="_on_start_pressed"]
+[connection signal="button_down" from="shop" to="shop" method="_on_shop_button_down"]

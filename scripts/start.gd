@@ -4,6 +4,7 @@ extends Button
 var plus = false
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -25,6 +26,7 @@ func _physics_process(_delta):
 		get_tree().paused = false
 		get_parent().get_node("Time").visible = true
 		get_parent().get_node("score").visible = true
+		get_parent().get_node("shop").visible = false
 		queue_free()
 
 func _on_start_pressed():
