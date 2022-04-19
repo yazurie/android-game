@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
 [ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://assets/image/shop.png" type="Texture" id=11]
-[ext_resource path="res://scenes/shop.gd" type="Script" id=12]
+[ext_resource path="res://scripts/openshop.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -57,12 +57,13 @@ extents = Vector2( 763.816, 27.7356 )
 size = 64
 font_data = ExtResource( 2 )
 
-[node name="Node" type="Node"]
+[node name="Node2D" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.00392157 )
 
 [node name="level" type="Label" parent="."]
-margin_left = 330.0
+margin_left = 335.0
 margin_top = -5.0
-margin_right = 369.0
+margin_right = 374.0
 margin_bottom = 59.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.156863, 0.647059, 0.921569, 1 )
@@ -113,7 +114,6 @@ __meta__ = {
 
 [node name="click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-pitch_scale = 2.0
 
 [node name="start" type="Button" parent="."]
 pause_mode = 2
@@ -194,6 +194,9 @@ margin_bottom = 57.8865
 custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0.92549, 0.827451, 1 )
 text = "shop"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="left" type="StaticBody2D" parent="."]
 

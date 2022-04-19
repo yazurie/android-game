@@ -51,11 +51,6 @@ func _physics_process(_delta):
 
 
 func _on_HpUp_timeout():
-	print(totalscore)
-	if totalscore == 0:
-		get_parent().get_parent().get_node("score").queue_free()
-		get_parent().get_parent().get_node("click").queue_free()
-		get_tree().reload_current_scene()
 	if get_parent().Score > 0:
 		get_parent().get_parent().get_node("click").play()
 		if get_parent().Score - (1 + totalscore / 100) > 0:
@@ -77,9 +72,10 @@ func _on_HpUp_timeout():
 			Globalvariables.BumperHp -= get_parent().Score * 10
 			get_parent().Score = 0
 		if Globalvariables.BumperHp <= 0:
+			Globalvariables.start = false
 			get_tree().reload_current_scene()
-	$Label.set_text(str(Globalvariables.BumperHp))
-
+	$Label.set_text(str(round(Globalvariables.BumperHp)))
+	get_parent().get_parent().get_node("score").set_text(str(round(get_parent().Score)))
 	
 	if get_parent().Score == 0:
 		Globalvariables.BumperHp = Globalvariables.corrBumperHp + totalscore
@@ -92,7 +88,7 @@ func _on_HpUp_timeout():
 		$Label/HpUp.stop()
 		$spawnbutton.start()
 		
-	get_parent().get_parent().get_node("score").set_text(str(get_parent().Score))
+	
 
 
 func _on_spawnbutton_timeout():

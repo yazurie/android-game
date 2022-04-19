@@ -1,10 +1,10 @@
 extends Node2D
 
-var timefont = DynamicFont.new()
 var button = preload("res://scenes/Button.tscn")
 var red = preload("res://assets/image/redB.png")
 var blue = preload("res://assets/image/blueB.png")
 var yellow = preload("res://assets/image/yellowB.png")
+var blink = true
 var colorM
 var top = -30000
 var down = 842.5
@@ -24,8 +24,9 @@ signal fspawn
 signal score_changed
 
 func _ready():
-	if Globalvariables.time - Globalvariables.level > 3:
-		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level
+	
+	if Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenalty > 3:
+		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenalty
 	else:
 		get_parent().get_node("Timer").wait_time = 3
 	Globalvariables.level += 1
@@ -46,7 +47,7 @@ func fspawn():
 	spawnbutton.position.y = down
 	spawnbutton.get_node("buttontexture").texture_normal = colorM
 	add_child(spawnbutton)
-	timefont.size = 128
+	
 func spawn(spawnposy):
 	
 	var colorchoice = [red, blue, yellow]
@@ -77,6 +78,14 @@ func spawn(spawnposy):
 	
 
 func _physics_process(_delta):
+	if blink:
+		if Globalvariables.start == false:
+			get_parent().modulate.a += 0.04
+			if get_parent().modulate.a > 1:
+				get_parent().modulate.a = 1
+				blink = false
+		else:
+			get_parent().modulate.a = 1
 	#print(Engine.get_frames_per_second())
 	if moving == true and Game1:
 		if leftbox.position.y != 50:

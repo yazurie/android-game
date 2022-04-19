@@ -2,6 +2,7 @@ extends Button
 
 
 var plus = false
+var blink = true
 
 
 
@@ -11,7 +12,11 @@ func _ready():
 
 
 func _physics_process(_delta):
-	
+	if blink:
+		get_parent().modulate.a += 0.03
+	if get_parent().modulate.a > 1:
+		get_parent().modulate.a = 1
+		blink = false
 	
 	if plus == false:
 		modulate.a -= 0.013

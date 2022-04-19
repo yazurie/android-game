@@ -1,0 +1,226 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/shop.gd" type="Script" id=1]
+[ext_resource path="res://assets/image/shopframe.png" type="Texture" id=2]
+[ext_resource path="res://assets/image/exitshop.png" type="Texture" id=3]
+[ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/image/shopdamage.png" type="Texture" id=5]
+[ext_resource path="res://assets/image/buydamage.png" type="Texture" id=6]
+[ext_resource path="res://assets/image/nextpage.png" type="Texture" id=7]
+[ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/image/bumperstarthp.png" type="Texture" id=9]
+[ext_resource path="res://assets/image/hpmultiply.png" type="Texture" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+outline_size = 1
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="shop" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="shopframe" type="Sprite" parent="."]
+position = Vector2( 360, 535 )
+scale = Vector2( 7, 7.6 )
+texture = ExtResource( 2 )
+
+[node name="exit" type="TextureButton" parent="."]
+margin_left = 250.0
+margin_top = 900.0
+margin_right = 350.0
+margin_bottom = 960.0
+rect_scale = Vector2( 2, 2 )
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="exit"]
+modulate = Color( 1, 1, 1, 0.490196 )
+margin_left = 20.0
+margin_top = 6.727
+margin_right = 80.0
+margin_bottom = 44.727
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="damage" type="TextureButton" parent="."]
+margin_left = 110.0
+margin_top = 80.0
+margin_right = 230.0
+margin_bottom = 200.0
+rect_scale = Vector2( 2, 2 )
+toggle_mode = true
+texture_normal = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buydamage" type="TextureButton" parent="damage"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="starthp" type="TextureButton" parent="."]
+margin_left = 380.0
+margin_top = 80.0
+margin_right = 500.0
+margin_bottom = 200.0
+rect_scale = Vector2( 2, 2 )
+toggle_mode = true
+texture_normal = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buystarthp" type="TextureButton" parent="starthp"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hpmultiply" type="TextureButton" parent="."]
+margin_left = 110.0
+margin_top = 440.0
+margin_right = 230.0
+margin_bottom = 560.0
+rect_scale = Vector2( 2, 2 )
+toggle_mode = true
+texture_normal = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buydamage" type="TextureButton" parent="hpmultiply"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="shootdelay" type="TextureButton" parent="."]
+margin_left = 380.0
+margin_top = 440.0
+margin_right = 500.0
+margin_bottom = 560.0
+rect_scale = Vector2( 2, 2 )
+toggle_mode = true
+texture_normal = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buydamage" type="TextureButton" parent="shootdelay"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 6 )
+
+[node name="nextpage" type="TextureButton" parent="."]
+margin_left = 500.0
+margin_top = 810.0
+margin_right = 540.0
+margin_bottom = 850.0
+rect_scale = Vector2( 5, 5 )
+texture_normal = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy" type="Label" parent="."]
+margin_left = 179.0
+margin_top = 300.0
+margin_right = 236.0
+margin_bottom = 338.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 2 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy2" type="Label" parent="."]
+margin_left = 440.0
+margin_top = 300.0
+margin_right = 497.0
+margin_bottom = 338.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 2 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy3" type="Label" parent="."]
+margin_left = 440.0
+margin_top = 660.0
+margin_right = 497.0
+margin_bottom = 698.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 2 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy4" type="Label" parent="."]
+margin_left = 179.0
+margin_top = 660.0
+margin_right = 236.0
+margin_bottom = 698.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 2 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="damagetext" type="Label" parent="."]
+visible = false
+margin_left = 120.8
+margin_top = 105.454
+margin_right = 432.8
+margin_bottom = 266.454
+custom_fonts/font = SubResource( 3 )
+text = "Increase the
+damage of your
+bullets
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="exit" to="." method="_on_TextureButton_button_down"]
+[connection signal="pressed" from="damage" to="." method="_on_damage_pressed"]
+[connection signal="pressed" from="starthp" to="." method="_on_starthp_pressed"]
+[connection signal="pressed" from="hpmultiply" to="." method="_on_hpmultiply_pressed"]
+[connection signal="pressed" from="shootdelay" to="." method="_on_shootdelay_pressed"]
+[connection signal="button_down" from="nextpage" to="." method="_on_nextpage_button_down"]
