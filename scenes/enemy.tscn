@@ -26,14 +26,15 @@ visible = false
 shape = SubResource( 1 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -17.4811
+margin_left = -18.0108
 margin_top = -28.7379
-margin_right = 22.5189
+margin_right = 21.9892
 margin_bottom = 34.2621
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 2 )
 text = "8"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

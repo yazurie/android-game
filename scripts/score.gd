@@ -12,6 +12,6 @@ func _ready():
 
 
 func _on_screen_score_changed():
-	set_text(str(get_parent().get_node("screen").Score))
+	set_text(Globalvariables.smallvalue(get_parent().get_node("screen").Score))
 
 

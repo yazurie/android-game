@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/exitshop.png-9b8e42e7b189b47e20a09a01b8b621c1.stex"
+path="res://.import/enoughmoney.png-8c42fec8f936e3b14a113d195f7ad77f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/image/exitshop.png"
-dest_files=[ "res://.import/exitshop.png-9b8e42e7b189b47e20a09a01b8b621c1.stex" ]
+source_file="res://assets/image/enoughmoney.png"
+dest_files=[ "res://.import/enoughmoney.png-8c42fec8f936e3b14a113d195f7ad77f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

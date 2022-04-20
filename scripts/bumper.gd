@@ -12,7 +12,8 @@ var hpmultiplier = 1
 
 
 func _ready():
-	$shootdelay.wait_time = Globalvariables.savegame_data.shootdelay
+	$shootdelay.wait_time = 0.6 - (float(Globalvariables.savegame_data.shootdelaylvl) / 10)
+	
 	if Globalvariables.BumperHp <= 0:
 		Globalvariables.BumperHp = 5
 	$Label.set_text(str(Globalvariables.BumperHp))
@@ -73,8 +74,9 @@ func _on_HpUp_timeout():
 			get_parent().Score = 0
 		if Globalvariables.BumperHp <= 0:
 			Globalvariables.start = false
+			Globalvariables.level = Globalvariables.savegame_data.startlevel
 			get_tree().reload_current_scene()
-	$Label.set_text(str(round(Globalvariables.BumperHp)))
+	$Label.set_text(Globalvariables.smallvalue(Globalvariables.BumperHp))
 	get_parent().get_parent().get_node("score").set_text(str(round(get_parent().Score)))
 	
 	if get_parent().Score == 0:
@@ -82,7 +84,7 @@ func _on_HpUp_timeout():
 		
 		
 		
-		$Label.set_text(str(Globalvariables.BumperHp))
+		$Label.set_text(Globalvariables.smallvalue(Globalvariables.BumperHp))
 		
 		get_parent().get_parent().get_node("score").queue_free()
 		$Label/HpUp.stop()
@@ -123,7 +125,7 @@ func _on_shootdelay_timeout():
 func _on_Area2D_body_entered(body):
 	Globalvariables.BumperHp -= body.damage
 	if Globalvariables.BumperHp < 1:
-		Globalvariables.level = 0
+		Globalvariables.level = Globalvariables.savegame_data.startlevel
 		Globalvariables.start = false
 		get_tree().reload_current_scene()
 	$Label.set_text(str(Globalvariables.BumperHp))

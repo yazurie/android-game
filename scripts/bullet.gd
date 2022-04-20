@@ -20,6 +20,7 @@ func _on_Area2D_body_entered(body):
 	body.get_node("Label").set_text(str(body.hp))
 	queue_free()
 	if body.hp < 1:
+		body.set_physics_process(false)
 		body.hp = 0
 		body.get_node("Label").set_text(str(body.hp))
 		body.get_node("CollisionShape2D").queue_free()
@@ -28,5 +29,5 @@ func _on_Area2D_body_entered(body):
 		Globalvariables.savegame_data.Coins += float(body.starthp) / 10
 		Globalvariables.savegame_data.Coins = stepify(Globalvariables.savegame_data.Coins, 0.1)
 		Globalvariables.save_data()
-		get_parent().get_parent().get_node("coin/Label").set_text(str(Globalvariables.savegame_data.Coins))
+		get_parent().get_parent().get_node("coin/Label").set_text(Globalvariables.smallvalue(Globalvariables.savegame_data.Coins))
 		body.get_node("DeadTimer").start()

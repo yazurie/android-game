@@ -30,13 +30,14 @@ func _ready():
 	else:
 		get_parent().get_node("Timer").wait_time = 3
 	Globalvariables.level += 1
+	
 	fspawn()
 	spawn(50)
 	get_parent().get_node("level").set_text(str(Globalvariables.level))
 	get_tree().paused = true
 
 func fspawn():
-	get_parent().get_node("coin/Label").set_text(str(Globalvariables.savegame_data.Coins))
+	get_parent().get_node("coin/Label").set_text(Globalvariables.smallvalue(Globalvariables.savegame_data.Coins))
 	get_parent().get_node("Timer").start()
 	
 	

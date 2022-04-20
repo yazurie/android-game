@@ -12,22 +12,24 @@ var time = 10
 
 var savegame_data = {
 	"Coins": 0,
-	"hpmultiply": 1,                        #beginn: 1
-	"startBumpHp": 5,                       #beginn: 5
-	"shootdelay": 0.5,                      #beginn: 0.5                         #beginn: 1
-	"penalty": 5,                           #beginn: 5
+	"shootdelayprice": 100,                      #beginn 100
+	"penaltylevel": 5,                           #beginn: 5
 	"startlevel": 0,                         #beginn: 0
 	"timepenalty": 0,                         #beginn: 0
 	
-	"damagelvl": 1
-}
+	"damagelvl": 1,                
+	"startBumpHpLvl": 1,                
+	"hplevel": 1,      
+	"shootdelaylvl": 1                     
+}                                   
 
 
 func _ready():
+	
 	level = savegame_data.startlevel
-	BumperHp = savegame_data.startBumpHp
+	BumperHp = savegame_data.startBumpHpLvl + (savegame_data.startBumpHpLvl * 4)
 	print(typeof(savegame_data.Coins))
-	#load_data()
+	load_data()
 
 
 func save_data():
@@ -47,4 +49,10 @@ func load_data():
 	
 	
 	
-	
+func smallvalue(value):
+	var orgvalue = value
+	if orgvalue >= 1000 and orgvalue < 1000000:
+		value = str(stepify(float(value)/1000, 0.01)) + "K"
+	if orgvalue >= 1000000:
+		value = str(stepify(float(value)/1000000, 0.01)) + "M"
+	return str(value)

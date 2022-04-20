@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/image/backpage.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/image/buydamage.png" type="Texture" id=6]
 [ext_resource path="res://assets/image/shopdamage.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -16,6 +17,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 48
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
 font_data = ExtResource( 1 )
 
 [node name="shop2" type="Node2D"]
@@ -83,6 +88,24 @@ margin_right = 120.0
 margin_bottom = 170.0
 texture_normal = ExtResource( 6 )
 
+[node name="startlevel" type="TextureButton" parent="."]
+margin_left = 110.0
+margin_top = 440.0
+margin_right = 230.0
+margin_bottom = 560.0
+rect_scale = Vector2( 2, 2 )
+toggle_mode = true
+texture_normal = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buystartlevel" type="TextureButton" parent="startlevel"]
+margin_top = 120.0
+margin_right = 120.0
+margin_bottom = 170.0
+texture_normal = ExtResource( 6 )
+
 [node name="backpage" type="TextureButton" parent="."]
 margin_left = 500.0
 margin_top = 810.0
@@ -107,12 +130,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buy2" type="Label" parent="."]
-margin_left = 440.0
-margin_top = 300.0
-margin_right = 494.0
-margin_bottom = 338.0
-rect_scale = Vector2( 2, 2 )
+[node name="buy2" type="Label" parent="buy"]
+margin_left = 135.5
+margin_right = 192.5
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 2 )
+text = "Buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy3" type="Label" parent="buy"]
+margin_left = 0.500008
+margin_top = 180.0
+margin_right = 57.5
+margin_bottom = 218.0
 custom_fonts/font = SubResource( 2 )
 text = "Buy"
 uppercase = true
@@ -123,7 +156,23 @@ __meta__ = {
 [node name="click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
+
+[node name="Coins" type="Sprite" parent="."]
+position = Vector2( 310, 850 )
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Coins"]
+margin_left = 41.0
+margin_top = -34.0
+margin_right = 81.0
+margin_bottom = -20.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_down" from="exit2" to="." method="_on_exit2_button_down"]
 [connection signal="pressed" from="lessloss" to="." method="_on_lessloss_pressed"]
 [connection signal="pressed" from="moretime" to="." method="_on_moretime_pressed"]
+[connection signal="pressed" from="startlevel" to="." method="_on_startlevel_pressed"]
 [connection signal="button_down" from="backpage" to="." method="_on_backpage_button_down"]

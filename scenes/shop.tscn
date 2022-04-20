@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/shop.gd" type="Script" id=1]
 [ext_resource path="res://assets/image/shopframe.png" type="Texture" id=2]
@@ -10,18 +10,37 @@
 [ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/image/bumperstarthp.png" type="Texture" id=9]
 [ext_resource path="res://assets/image/hpmultiply.png" type="Texture" id=10]
+[ext_resource path="res://assets/Font/Gameplay.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/image/coin.png" type="Texture" id=12]
+[ext_resource path="res://assets/image/shootdelayimage.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 outline_size = 1
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 48
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=8]
 size = 32
+extra_spacing_top = -7
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 64
 font_data = ExtResource( 4 )
 
 [node name="shop" type="Node2D"]
@@ -77,6 +96,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="damagetext" type="Label" parent="damage"]
+visible = false
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 317.0
+margin_bottom = 171.0
+custom_fonts/font = SubResource( 5 )
+text = "increase"
+
+[node name="name" type="Label" parent="damage"]
+margin_left = 25.0
+margin_top = 145.0
+margin_right = 173.0
+margin_bottom = 183.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "Damage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy" type="Label" parent="damage"]
+margin_left = 35.0
+margin_top = 110.0
+margin_right = 92.0
+margin_bottom = 148.0
+custom_fonts/font = SubResource( 4 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="damage"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 177.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "not enough
+   Coins"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="starthp" type="TextureButton" parent="."]
 margin_left = 380.0
 margin_top = 80.0
@@ -98,6 +163,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="starthptext" type="Label" parent="starthp"]
+visible = false
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 317.0
+margin_bottom = 171.0
+custom_fonts/font = SubResource( 5 )
+text = "increase"
+
+[node name="name" type="Label" parent="starthp"]
+margin_left = 50.0
+margin_top = 145.0
+margin_right = 98.0
+margin_bottom = 183.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "HP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy" type="Label" parent="starthp"]
+margin_left = 35.0
+margin_top = 110.0
+margin_right = 92.0
+margin_bottom = 148.0
+custom_fonts/font = SubResource( 4 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="starthp"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 177.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "not enough
+   Coins"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="hpmultiply" type="TextureButton" parent="."]
 margin_left = 110.0
 margin_top = 440.0
@@ -110,11 +221,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buydamage" type="TextureButton" parent="hpmultiply"]
+[node name="buyhpmultiply" type="TextureButton" parent="hpmultiply"]
 margin_top = 120.0
 margin_right = 120.0
 margin_bottom = 170.0
 texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hpmultiplytext" type="Label" parent="hpmultiply"]
+visible = false
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 187.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 3 )
+text = "Increase the1
+hp you gain when1
+pressing the correct1
+button"
+
+[node name="name" type="Label" parent="hpmultiply"]
+margin_left = 27.0
+margin_top = 145.0
+margin_right = 165.0
+margin_bottom = 183.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "HP GAIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy" type="Label" parent="hpmultiply"]
+margin_left = 35.0
+margin_top = 110.0
+margin_right = 92.0
+margin_bottom = 148.0
+custom_fonts/font = SubResource( 4 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="hpmultiply"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 177.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "not enough
+   Coins"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney2" type="Label" parent="hpmultiply"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 177.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "not enough
+   Coins"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,16 +299,78 @@ margin_right = 500.0
 margin_bottom = 560.0
 rect_scale = Vector2( 2, 2 )
 toggle_mode = true
-texture_normal = ExtResource( 5 )
+texture_normal = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buydamage" type="TextureButton" parent="shootdelay"]
+[node name="buyshootdelay" type="TextureButton" parent="shootdelay"]
 margin_top = 120.0
 margin_right = 120.0
 margin_bottom = 170.0
 texture_normal = ExtResource( 6 )
+
+[node name="shootdelaytext" type="Label" parent="shootdelay"]
+visible = false
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 187.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 3 )
+text = "Decrease the
+time between each
+shot"
+
+[node name="name" type="Label" parent="shootdelay"]
+margin_left = 3.37323
+margin_top = 145.0
+margin_right = 243.373
+margin_bottom = 183.0
+rect_scale = Vector2( 0.48, 0.5 )
+custom_fonts/font = SubResource( 6 )
+text = "SHOOTDELAY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="buy" type="Label" parent="shootdelay"]
+margin_left = 35.0
+margin_top = 110.0
+margin_right = 92.0
+margin_bottom = 148.0
+custom_fonts/font = SubResource( 4 )
+text = "buy"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="shootdelay"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 177.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "not enough
+   Coins"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="maxlevelreached" type="Label" parent="shootdelay"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 119.0
+margin_bottom = 190.0
+custom_fonts/font = SubResource( 8 )
+text = "max level
+reached"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="nextpage" type="TextureButton" parent="."]
 margin_left = 500.0
@@ -148,79 +383,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="buy" type="Label" parent="."]
-margin_left = 179.0
-margin_top = 300.0
-margin_right = 236.0
-margin_bottom = 338.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 2 )
-text = "buy"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="buy2" type="Label" parent="."]
-margin_left = 440.0
-margin_top = 300.0
-margin_right = 497.0
-margin_bottom = 338.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 2 )
-text = "buy"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="buy3" type="Label" parent="."]
-margin_left = 440.0
-margin_top = 660.0
-margin_right = 497.0
-margin_bottom = 698.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 2 )
-text = "buy"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="buy4" type="Label" parent="."]
-margin_left = 179.0
-margin_top = 660.0
-margin_right = 236.0
-margin_bottom = 698.0
-rect_scale = Vector2( 2, 2 )
-custom_fonts/font = SubResource( 2 )
-text = "buy"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 autoplay = true
 
-[node name="damagetext" type="Label" parent="."]
-visible = false
-margin_left = 120.8
-margin_top = 105.454
-margin_right = 432.8
-margin_bottom = 266.454
-custom_fonts/font = SubResource( 3 )
-text = "Increase the
-damage of your
-bullets
-"
+[node name="Coins" type="Sprite" parent="."]
+position = Vector2( 310, 850 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Coins"]
+margin_left = 41.0
+margin_top = -34.0
+margin_right = 81.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 7 )
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="ready" from="shopframe" to="." method="_on_shopframe_ready"]
 [connection signal="button_down" from="exit" to="." method="_on_TextureButton_button_down"]
 [connection signal="pressed" from="damage" to="." method="_on_damage_pressed"]
+[connection signal="button_down" from="damage/buydamage" to="." method="_on_buydamage_button_down"]
 [connection signal="pressed" from="starthp" to="." method="_on_starthp_pressed"]
+[connection signal="button_down" from="starthp/buystarthp" to="." method="_on_buystarthp_button_down"]
 [connection signal="pressed" from="hpmultiply" to="." method="_on_hpmultiply_pressed"]
+[connection signal="button_down" from="hpmultiply/buyhpmultiply" to="." method="_on_buyhpmultiply_button_down"]
 [connection signal="pressed" from="shootdelay" to="." method="_on_shootdelay_pressed"]
+[connection signal="button_down" from="shootdelay/buyshootdelay" to="." method="_on_buyshootdelay_button_down"]
 [connection signal="button_down" from="nextpage" to="." method="_on_nextpage_button_down"]

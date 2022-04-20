@@ -12,7 +12,7 @@ var damage = 0
 func _ready():
 	var colors = ["res://assets/image/enemyblue.png","res://assets/image/enemyred.png", "res://assets/image/enemyyellow.png"]
 	$Sprite.texture = load(colors[randi() % 3])
-	damage = randi() %  (Globalvariables.level * Globalvariables.level) + Globalvariables.level
+	damage = randi() %  (int(Globalvariables.level) * int(Globalvariables.level)) + Globalvariables.level
 	hp = damage
 	damage = 1 + (damage / 3)
 	starthp = hp
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	#dead
 	if position.y > 1134:
 		Globalvariables.BumperHp = 5
-		Globalvariables.level = 0
+		Globalvariables.level = Globalvariables.savegame_data.startlevel
 		Globalvariables.save_data()
 		Globalvariables.start = false
 		
@@ -51,6 +51,5 @@ func _physics_process(delta):
 func _on_DeadTimer_timeout():
 	modulate.a -= 0.3
 	print(modulate.a)
-	set_physics_process(false)
 	if modulate.a <= -1:
 		get_tree().reload_current_scene()

@@ -65,9 +65,12 @@ margin_left = 335.0
 margin_top = -5.0
 margin_right = 374.0
 margin_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.156863, 0.647059, 0.921569, 1 )
 text = "0"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,9 +80,9 @@ script = ExtResource( 5 )
 
 [node name="score" type="Label" parent="."]
 visible = false
-margin_left = 330.0
+margin_left = 310.0
 margin_top = 330.0
-margin_right = 444.0
+margin_right = 424.0
 margin_bottom = 735.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -87,6 +90,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0431373, 0.784314, 0.627451, 1 )
 text = "0
 "
+align = 1
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
