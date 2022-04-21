@@ -117,13 +117,12 @@ func _on_shootdelay_timeout():
 
 
 func _on_Area2D_body_entered(body):
-	Globalvariables.BumperHp = Globalvariables.smallvalue(Globalvariables.BumperHp)body.damage
-	
+	Globalvariables.BumperHp -= body.damage
 	if Globalvariables.BumperHp < 1:
 		Globalvariables.level = Globalvariables.savegame_data.startlevel - 1
 		Globalvariables.start = false
 		get_tree().reload_current_scene()
-	$Label.set_text(Globalvariables.smallvalue(Globalvariables.BumperHp))
+	$Label.set_text(str(Globalvariables.BumperHp))
 	
 
 func spawnenemy():

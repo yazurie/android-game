@@ -16,7 +16,7 @@ func _ready():
 	hp = damage
 	damage = 1 + (damage / 3)
 	starthp = hp
-	$Label.set_text(str(Globalvariables.enemyvalue(hp)))
+	$Label.set_text(Globalvariables.enemyvalue(hp))
 
 
 
