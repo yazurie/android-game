@@ -35,7 +35,7 @@ func _ready():
 	level = savegame_data.startlevel - 1
 	BumperHp = savegame_data.startBumpHpLvl + (savegame_data.startBumpHpLvl * 4)
 	print(typeof(savegame_data.Coins))
-	#load_data()
+	load_data()
 
 
 func save_data():
@@ -57,6 +57,8 @@ func load_data():
 	
 func smallvalue(value):
 	var orgvalue = value
+	if value < 1000:
+		value = round(value)
 	if orgvalue >= 1000 and orgvalue < 1000000:
 		value = str(stepify(float(value)/1000, 0.01)) + "K"
 	if orgvalue >= 1000000:
@@ -68,4 +70,4 @@ func enemyvalue(value):
 		value = str(stepify(float(value)/1000, 1)) + "K"
 	if orgvalue >= 1000000:
 		value = str(stepify(float(value)/1000000, 1)) + "M"
-	return str(value)
+	return value

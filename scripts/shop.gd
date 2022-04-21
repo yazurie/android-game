@@ -25,6 +25,7 @@ func _physics_process(_delta):
 		blink = false
 
 func _on_TextureButton_button_down():
+	Globalvariables.level = values.startlevel - 1
 	get_tree().change_scene("res://scenes/screen.tscn")
 
 
@@ -37,6 +38,7 @@ func _on_backpage_button_down():
 
 
 func _on_exit2_button_down():
+	Globalvariables.level = values.startlevel - 1
 	get_tree().change_scene("res://scenes/screen.tscn")
 
 #-----------------------------------------------------------------
@@ -254,7 +256,7 @@ func checkaffordable2():
 		$startlevel/name.visible = false
 		$startlevel/higher/level.set_text(Globalvariables.smallvalue(values.startlevel + 3))
 
-
+#----------------------------------------------------------------
 
 func _on_lessloss_pressed():
 	
@@ -317,7 +319,75 @@ func _on_startlevel_pressed():
 		$startlevel.texture_normal = load("res://assets/image/shopdamage.png")
 		$startlevel/startleveltext.visible = false
 
+#------------------------------------------
+
+func _on_buydlessloss_button_down():
+	if values.penaltylevel > 1:
+		if values.Coins >= values.penaltylevelprice:
+			values.Coins -= values.penaltylevelprice
+			values.penaltylevel -= 1
+			values.penaltylevelC += 1
+			values.penaltylevelprice = values.penaltylevelprice * 10
+			var loss = values.penaltylevel
+			var nextloss = values.penaltylevel - 1
+			var cost = values.penaltylevelprice
+			$lessloss/lesslosstext.set_text("Decrease loss\nof hp when clicking\nthe wrong button\nCurrent Level:"+ str(values.penaltylevelC) + "\nChange:\n" + str(loss) + "x" + " -> " + str(nextloss) + "x" +"\nPrice: "+ Globalvariables.smallvalue(cost))
+			get_node("Coins/Label").set_text(Globalvariables.smallvalue((values.Coins)))
+			checkaffordable2()
+			Globalvariables.save_data()
+		else:
+			$lessloss/buy.visible = false
+			$lessloss/name.visible = false
+			$lessloss/nomoney.visible = true
+
+func _on_buymoretime_button_down():
+	if values.Coins >=0.5*(values.timepenaltylevel * values.timepenaltylevel) + values.timepenaltylevel:
+		values.Coins -= 0.5*(values.timepenaltylevel * values.timepenaltylevel) + values.timepenaltylevel
+		values.timepenaltylevel += 1
+		var time = values.timepenaltylevel
+		var nextime = values.timepenaltylevel + 1
+		var cost = 0.5*(values.timepenaltylevel * values.timepenaltylevel) + values.timepenaltylevel
+		$moretime/moretimetext.set_text("Increase the\ntime you have\nto gain hp\nCurrent Level:" + Globalvariables.smallvalue(time) + "\nChange:\n" + Globalvariables.smallvalue(time) + " -> " + Globalvariables.smallvalue(nextime)+"\nPrice: " + Globalvariables.smallvalue(cost))
+		get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
+		checkaffordable2()
+		Globalvariables.save_data()
+	else:
+		$moretime/buy.visible = false
+		$moretime/name.visible = false
+		$moretime/nomoney.visible = true
 
 
+func _on_buymintime_button_down():
+	if values.Coins >= values.mintimeprice:
+		values.Coins -= values.mintimeprice
+		values.mintime += 1
+		values.mintimeprice = values.mintimeprice * 5
+		var mintime = values.mintime
+		var level = values.mintime - 2
+		var nextmintime = values.mintime + 1
+		var cost = values.mintimeprice
+		$mintime/mintimetext.set_text("Increase the\nminimum time you\nhave to gain hp\nCurrent Level:"+ Globalvariables.smallvalue(level)+ "\nChange:\n" + Globalvariables.smallvalue(mintime) + " -> " + Globalvariables.smallvalue(nextmintime)+"\nPrice: " + Globalvariables.smallvalue(cost))
+		get_node("Coins/Label").set_text(Globalvariables.smallvalue((values.Coins)))
+		checkaffordable2()
+		Globalvariables.save_data()
+	else:
+		$mintime/buy.visible = false
+		$mintime/name.visible = false
+		$mintime/nomoney.visible = true
 
-
+func _on_buystartlevel_button_down():
+	if values.highestlevel > values.startlevel + 3:
+		if values.Coins >= ((values.startlevel/10) + 1)* (values.startlevel * values.startlevel):
+			values.Coins -= ((values.startlevel/10) + 1)* (values.startlevel * values.startlevel)
+			values.startlevel += 1
+			var startlevel = values.startlevel
+			var nextstartlevel = values.startlevel + 1
+			var cost = ((values.startlevel/10) + 1)* (values.startlevel * values.startlevel)
+			$startlevel/startleveltext.set_text("Increase the\nlevel that your\nstarting to play in\nCurrent Level:" + Globalvariables.smallvalue(startlevel)+ "\nChange:\n" + Globalvariables.smallvalue(startlevel) + " -> " + Globalvariables.smallvalue(nextstartlevel) + "\nPrice: "+ Globalvariables.smallvalue(cost))
+			get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
+			checkaffordable2()
+			Globalvariables.save_data()
+		else:
+			$startlevel/buy.visible = false
+			$startlevel/name.visible = false
+			$startlevel/nomoney.visible = true
