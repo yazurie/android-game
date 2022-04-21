@@ -24,11 +24,14 @@ signal fspawn
 signal score_changed
 
 func _ready():
-	
-	if Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenalty > 3:
-		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenalty
+	get_parent().modulate.a = 0.1
+	if Globalvariables.savegame_data.highestlevel < Globalvariables.level:
+		Globalvariables.savegame_data.highestlevel = Globalvariables.level
+	if Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel > Globalvariables.savegame_data.mintime:
+		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel
 	else:
-		get_parent().get_node("Timer").wait_time = 3
+		get_parent().get_node("Timer").wait_time = Globalvariables.savegame_data.mintime
+		
 	Globalvariables.level += 1
 	
 	fspawn()
@@ -135,5 +138,8 @@ func _on_Timer_timeout():              #ENDS PHASE 1
 
 func _on_screen_fspawn():
 	fspawn()
+
+
+
 
 

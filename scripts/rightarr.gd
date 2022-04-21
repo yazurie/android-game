@@ -2,19 +2,22 @@ extends TouchScreenButton
 
 var right = false
 
-
+func _ready():
+	visible = false
 
 
 func _physics_process(_delta):
 	if right:
-		get_parent().get_node("Bumper").motion.x = 300
+		get_parent().get_node("screen/Bumper").motion.x = 300
 
 
 
 
-func _on_TouchScreenButton_pressed():
+
+
+func _on_rightmove_pressed():
 	right = true
 
 
-func _on_TouchScreenButton_released():
+func _on_rightmove_released():
 	right = false

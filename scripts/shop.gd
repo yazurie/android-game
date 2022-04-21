@@ -70,7 +70,7 @@ func checkaffordable1():
 		$shootdelay/name.visible = false
 		$shootdelay/buy.visible = false
 		$shootdelay/maxlevelreached.visible = true
-		$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\n shot\n\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nCurrent delay: "+ str(shootdelay))
+		$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\nshot\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nCurrent delay:\n"+ str(shootdelay))
 
 
 
@@ -85,11 +85,12 @@ func checkaffordable1():
 func _on_damage_pressed():
 	if $damage.pressed:
 		var damage = round(0.5*(values.damagelvl * values.damagelvl))
+		var nextdamage = round(0.5*((values.damagelvl +1) * (values.damagelvl +1)))
 		var cost =5*(values.damagelvl * values.damagelvl)
 		
 		$damage.texture_normal = load("res://assets/image/more info background.png")
 		$damage/damagetext.visible = true
-		$damage/damagetext.set_text("Increase the \ndamage of your \nbullets\n\nCurrent Level: "+ str(values.damagelvl)+ "\nCurrent Damage:"+Globalvariables.smallvalue(damage) +"\nPrice: " + Globalvariables.smallvalue(cost) + " Coins")
+		$damage/damagetext.set_text("Increase the \ndamage of your \nbullets\nCurrent Level: "+ Globalvariables.smallvalue(values.damagelvl)+ "\nChange:\n"+Globalvariables.smallvalue(damage) + " -> "+ Globalvariables.smallvalue(nextdamage)+"\nPrice: " + Globalvariables.smallvalue(cost) + " Coins")
 	else:
 		$damage.texture_normal = load("res://assets/image/shopdamage.png")
 		$damage/damagetext.visible = false
@@ -97,11 +98,12 @@ func _on_damage_pressed():
 func _on_starthp_pressed():
 	if $starthp.pressed:
 		var hp = values.startBumpHpLvl + (values.startBumpHpLvl * 4)
+		var nexthp = (values.startBumpHpLvl + 1) + ((values.startBumpHpLvl + 1) * 4)
 		var cost = 5*(values.startBumpHpLvl * values.startBumpHpLvl)
 		
 		$starthp.texture_normal = load("res://assets/image/more info background.png")
 		$starthp/starthptext.visible = true
-		$starthp/starthptext.set_text("Increase the \nbase hp of your \nBumper\n\nCurrent Level: "+ str(values.startBumpHpLvl)+ "\nCurrent hp: "+Globalvariables.smallvalue(hp)+ "\nPrice: "+ Globalvariables.smallvalue(cost) + " Coins")
+		$starthp/starthptext.set_text("Increase the \nbase hp of your \nBumper\nCurrent Level: "+ Globalvariables.smallvalue(values.startBumpHpLvl)+ "\nChange:\n"+Globalvariables.smallvalue(hp)+ " -> " + Globalvariables.smallvalue(nexthp)+"\nPrice: "+ Globalvariables.smallvalue(cost) + " Coins")
 	else:
 		$starthp/starthptext.visible = false
 		$starthp.texture_normal = load("res://assets/image/bumperstarthp.png")
@@ -109,9 +111,10 @@ func _on_starthp_pressed():
 func _on_hpmultiply_pressed():
 	if $hpmultiply.pressed:
 		var hpmultiply = values.hplevel
+		var nexthpmultiply = values.hplevel + 1
 		var cost = 100*values.hplevel + (100*(values.hplevel * values.hplevel))
 		$hpmultiply/hpmultiplytext.visible = true
-		$hpmultiply/hpmultiplytext.set_text("Increase hp\ngain when pressing\nthe correct button\n\nCurrent Level: "+ str(values.hplevel)+ "\nCurrent multiply:"+ Globalvariables.smallvalue(hpmultiply) + "x"  +"\nPrice: "+ Globalvariables.smallvalue(cost))
+		$hpmultiply/hpmultiplytext.set_text("Increase hp\ngain when pressing\nthe correct button\nCurrent Level: "+ Globalvariables.smallvalue(values.hplevel)+ "\nChange:\n"+ Globalvariables.smallvalue(hpmultiply) + "x" + " -> " + Globalvariables.smallvalue(nexthpmultiply) + "x" +"\nPrice: "+ Globalvariables.smallvalue(cost))
 		$hpmultiply.texture_normal = load("res://assets/image/more info background.png")
 	else:
 		$hpmultiply/hpmultiplytext.visible = false
@@ -119,14 +122,15 @@ func _on_hpmultiply_pressed():
 
 func _on_shootdelay_pressed():
 	if $shootdelay.pressed:
-		var shootdelay = 0.6 - (float(values.shootdelaylvl) / 10)
+		var shootdelay = 0.6 - (float(values.shootdelaylvl) / 10 )
+		var nextshootdelay = 0.6 - (float(values.shootdelaylvl + 1) /10 )
 		var cost = values.shootdelayprice
 		$shootdelay/shootdelaytext.visible = true
-		$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\n shot\n\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nCurrent delay: "+ str(shootdelay)+ "\nPrice: "+Globalvariables.smallvalue(cost))
+		$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\nshot\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nChange:\n"+ str(shootdelay)+ " -> " + str(nextshootdelay)  +"\nPrice: "+Globalvariables.smallvalue(cost))
 		$shootdelay.texture_normal = load("res://assets/image/more info background.png")
 	else:
 		$shootdelay/shootdelaytext.visible = false
-		$shootdelay.texture_normal = load("res://assets/image/shopdamage.png")
+		$shootdelay.texture_normal = load("res://assets/image/shootdelayimage.png")
 
 
 #----------------------------------------------------------------------------------
@@ -140,8 +144,9 @@ func _on_buydamage_button_down():
 		values.Coins -= 5*(values.damagelvl * values.damagelvl)
 		values.damagelvl += 1
 		var damage = round(0.5*(values.damagelvl * values.damagelvl))
+		var nextdamage = round(0.5*((values.damagelvl +1) * (values.damagelvl +1)))
 		var cost = 5*(values.damagelvl * values.damagelvl)
-		$damage/damagetext.set_text("Increase the \ndamage of your \nbullets\n\nCurrent Level: "+ str(values.damagelvl)+ "\nCurrent Damage:"+Globalvariables.smallvalue(damage) +"\nPrice: " + Globalvariables.smallvalue(cost) + " Coins")
+		$damage/damagetext.set_text("Increase the \ndamage of your \nbullets\nCurrent Level: "+ Globalvariables.smallvalue(values.damagelvl)+ "\nChange:\n"+Globalvariables.smallvalue(damage) + " -> "+ Globalvariables.smallvalue(nextdamage)+"\nPrice: " + Globalvariables.smallvalue(cost) + " Coins")
 		get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
 		checkaffordable1()
 		Globalvariables.save_data()
@@ -155,8 +160,9 @@ func _on_buystarthp_button_down():
 		values.Coins -= 5*(values.startBumpHpLvl * values.startBumpHpLvl)
 		values.startBumpHpLvl += 1
 		var hp = values.startBumpHpLvl + (values.startBumpHpLvl * 4)
+		var nexthp = (values.startBumpHpLvl + 1) + ((values.startBumpHpLvl + 1) * 4)
 		var cost = 5*(values.startBumpHpLvl * values.startBumpHpLvl)
-		$starthp/starthptext.set_text("Increase the \nbase hp of your \nBumper\n\nCurrent Level: "+ str(values.startBumpHpLvl)+ "\nCurrent hp: "+Globalvariables.smallvalue(hp)+ "\nPrice: "+ Globalvariables.smallvalue(cost) + " Coins")
+		$starthp/starthptext.set_text("Increase the \nbase hp of your \nBumper\nCurrent Level: "+ Globalvariables.smallvalue(values.startBumpHpLvl)+ "\nChange:\n"+Globalvariables.smallvalue(hp)+ " -> " + Globalvariables.smallvalue(nexthp)+"\nPrice: "+ Globalvariables.smallvalue(cost) + " Coins")
 		get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
 		checkaffordable1()
 		Globalvariables.save_data()
@@ -170,8 +176,9 @@ func _on_buyhpmultiply_button_down():
 		values.Coins -= (100*values.hplevel + (100*(values.hplevel * values.hplevel)))
 		values.hplevel += 1
 		var hpmultiply = values.hplevel
+		var nexthpmultiply = values.hplevel + 1
 		var cost = 100*values.hplevel + (100*(values.hplevel * values.hplevel))
-		$hpmultiply/hpmultiplytext.set_text("Increase hp\ngain when pressing\nthe correct button\n\nCurrent Level:"+ str(values.hplevel)+ "\nCurrent multiply:"+ Globalvariables.smallvalue(hpmultiply) + "x" +"\nPrice: "+ Globalvariables.smallvalue(cost) + " Coins")
+		$hpmultiply/hpmultiplytext.set_text("Increase hp\ngain when pressing\nthe correct button\nCurrent Level: "+ Globalvariables.smallvalue(values.hplevel)+ "\nChange:\n"+ Globalvariables.smallvalue(hpmultiply) + "x" + " -> " + Globalvariables.smallvalue(nexthpmultiply) + "x" +"\nPrice: "+ Globalvariables.smallvalue(cost))
 		get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
 		checkaffordable1()
 		Globalvariables.save_data()
@@ -188,8 +195,9 @@ func _on_buyshootdelay_button_down():
 			values.shootdelayprice = values.shootdelayprice * 10
 			values.shootdelaylvl += 1
 			var shootdelay = 0.6 - (float(values.shootdelaylvl) / 10)
+			var nextshootdelay = 0.6 - (float(values.shootdelaylvl + 1) /10 )
 			var cost = values.shootdelayprice
-			$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\n shot\n\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nCurrent delay: "+ str(shootdelay)+ "\nPrice: "+Globalvariables.smallvalue(cost))
+			$shootdelay/shootdelaytext.set_text("Decrease the\ntime between each\nshot\nCurrent Level: "+ str(values.shootdelaylvl)+ "\nChange:\n"+ str(shootdelay)+ " -> " + str(nextshootdelay)  +"\nPrice: "+Globalvariables.smallvalue(cost))
 			get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))
 			checkaffordable1()
 			Globalvariables.save_data()
@@ -207,23 +215,109 @@ func _on_buyshootdelay_button_down():
 #start of shop2
 #------------------------------------------------------------------------------------------------------
 
+func _on_exit2_ready():
+	checkaffordable2()
 
-
+func checkaffordable2():
+	if values.penaltylevel > 1:
+		if values.Coins >= values.penaltylevelprice:
+			$lessloss/buydlessloss.texture_normal = load("res://assets/image/enoughmoney.png")
+		else:
+			$lessloss/buydlessloss.texture_normal = load("res://assets/image/buydamage.png")
+	else:
+		$lessloss/buydlessloss.texture_normal = load("res://assets/image/buydamage.png")
+		$lessloss/maxlevel.visible = true
+		$lessloss/buy.visible = false
+		$lessloss/name.visible = false
+	if values.Coins >= 0.5*(values.timepenaltylevel * values.timepenaltylevel) + values.timepenaltylevel:
+		$moretime/buymoretime.texture_normal = load("res://assets/image/enoughmoney.png")
+	else:
+		$moretime/buymoretime.texture_normal = load("res://assets/image/buydamage.png")
+	
+	if values.mintime < 10:
+		if values.Coins >= values.mintimeprice:
+			$mintime/buymintime.texture_normal = load("res://assets/image/enoughmoney.png")
+		else:
+			$mintime/buymintime.texture_normal = load("res://assets/image/buydamage.png")
+	else:
+		$mintime/buymintime.texture_normal = load("res://assets/image/buydamage.png")
+		$mintime/buy.visible = false
+	if values.highestlevel > values.startlevel + 3:
+		if values.Coins >= (values.startlevel/10)* (values.startlevel * values.startlevel):
+			$startlevel/buystartlevel.texture_normal = load("res://assets/image/enoughmoney.png")
+		else:
+			$startlevel/buystartlevel.texture_normal = load("res://assets/image/buydamage.png")
+	else:
+		$startlevel/buystartlevel.texture_normal = load("res://assets/image/buydamage.png")
+		$startlevel/buy.visible = false
+		$startlevel/higher.visible = true
+		$startlevel/name.visible = false
+		$startlevel/higher/level.set_text(Globalvariables.smallvalue(values.startlevel + 3))
 
 
 
 func _on_lessloss_pressed():
+	
 	if $lessloss.pressed:
-		$lessloss.texture_normal = load("res://assets/image/more info background.png")
+		$lessloss/lesslosstext.visible = true
+		if values.penaltylevel > 1:
+			var loss = values.penaltylevel
+			var nextloss = values.penaltylevel - 1
+			var cost = values.penaltylevelprice
+		
+			$lessloss.texture_normal = load("res://assets/image/more info background.png")
+			$lessloss/lesslosstext.set_text("Decrease loss\nof hp when clicking\nthe wrong button\nCurrent Level:"+ str(values.penaltylevelC) + "\nChange:\n" + str(loss) + "x" + " -> " + str(nextloss) + "x" +"\nPrice: "+ Globalvariables.smallvalue(cost))
+			
+		else:
+			$lessloss.texture_normal = load("res://assets/image/more info background.png")
+			$lessloss/lesslosstext.set_text("Decrease loss\nof hp when clicking\nthe wrong button\nCurrent Level:" + str(values.penaltylevelC) + "\nCurrently:\n" + Globalvariables.smallvalue(values.penaltylevel) + "x")
+			
+		
 	else:
 		$lessloss.texture_normal = load("res://assets/image/shopdamage.png")
+		$lessloss/lesslosstext.visible = false
 
 
 func _on_moretime_pressed():
 	if $moretime.pressed:
+		var time = values.timepenaltylevel
+		var nextime = values.timepenaltylevel + 1
+		var cost = 0.5*(values.timepenaltylevel * values.timepenaltylevel) + values.timepenaltylevel
 		$moretime.texture_normal = load("res://assets/image/more info background.png")
+		$moretime/moretimetext.set_text("Increase the\ntime you have\nto gain hp\nCurrent Level:" + Globalvariables.smallvalue(time) + "\nChange:\n" + Globalvariables.smallvalue(time) + " -> " + Globalvariables.smallvalue(nextime)+"\nPrice: " + Globalvariables.smallvalue(cost))
+		$moretime/moretimetext.visible = true
 	else:
 		$moretime.texture_normal = load("res://assets/image/shopdamage.png")
+		$moretime/moretimetext.visible = false
+
+
+func _on_mintime_pressed():
+	if $mintime.pressed:
+		var mintime = values.mintime
+		var level = values.mintime - 2
+		var nextmintime = values.mintime + 1
+		var cost = values.mintimeprice
+		$mintime.texture_normal = load("res://assets/image/more info background.png")
+		$mintime/mintimetext.set_text("Increase the\nminimum time you\nhave to gain hp\nCurrent Level:"+ Globalvariables.smallvalue(level)+ "\nChange:\n" + Globalvariables.smallvalue(mintime) + " -> " + Globalvariables.smallvalue(nextmintime)+"\nPrice: " + Globalvariables.smallvalue(cost))
+		$mintime/mintimetext.visible = true
+	else:
+		$mintime.texture_normal = load("res://assets/image/shopdamage.png")
+		$mintime/mintimetext.visible = false
+
 
 func _on_startlevel_pressed():
-	pass # Replace with function body
+	if $startlevel.pressed:
+		var startlevel = values.startlevel
+		var nextstartlevel = values.startlevel + 1
+		var cost = ((values.startlevel/10) + 1)* (values.startlevel * values.startlevel)
+		$startlevel.texture_normal = load("res://assets/image/more info background.png")
+		$startlevel/startleveltext.set_text("Increase the\nlevel that your\nstarting to play in\nCurrent Level:" + Globalvariables.smallvalue(startlevel)+ "\nChange:\n" + Globalvariables.smallvalue(startlevel) + " -> " + Globalvariables.smallvalue(nextstartlevel) + "\nPrice: "+ Globalvariables.smallvalue(cost))
+		$startlevel/startleveltext.visible = true
+	else:
+		$startlevel.texture_normal = load("res://assets/image/shopdamage.png")
+		$startlevel/startleveltext.visible = false
+
+
+
+
+

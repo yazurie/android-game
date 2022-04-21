@@ -3,7 +3,8 @@ extends TouchScreenButton
 
 var left = false
 
-
+func _ready():
+	visible = false
 
 
 
@@ -11,12 +12,17 @@ var left = false
 
 func _physics_process(_delta):
 	if left:
-		get_parent().get_node("Bumper").motion.x = -300
+		get_parent().get_node("screen/Bumper").motion.x = -300
 
 
-func _on_TouchScreenButton_pressed():
+
+
+
+
+
+func _on_leftmove_pressed():
 	left = true
 
 
-func _on_TouchScreenButton_released():
+func _on_leftmove_released():
 	left = false

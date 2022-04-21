@@ -16,7 +16,7 @@ func _ready():
 	hp = damage
 	damage = 1 + (damage / 3)
 	starthp = hp
-	$Label.set_text(str(hp))
+	$Label.set_text(Globalvariables.enemyvalue(hp))
 
 
 
@@ -28,7 +28,7 @@ func _physics_process(delta):
 	#dead
 	if position.y > 1134:
 		Globalvariables.BumperHp = 5
-		Globalvariables.level = Globalvariables.savegame_data.startlevel
+		Globalvariables.level = Globalvariables.savegame_data.startlevel - 1
 		Globalvariables.save_data()
 		Globalvariables.start = false
 		

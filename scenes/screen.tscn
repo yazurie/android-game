@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=2]
@@ -12,6 +12,9 @@
 [ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=10]
 [ext_resource path="res://assets/image/shop.png" type="Texture" id=11]
 [ext_resource path="res://scripts/openshop.gd" type="Script" id=12]
+[ext_resource path="res://scripts/leftarr.gd" type="Script" id=13]
+[ext_resource path="res://scripts/rightarr.gd" type="Script" id=14]
+[ext_resource path="res://assets/image/transparency.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -58,7 +61,6 @@ size = 64
 font_data = ExtResource( 2 )
 
 [node name="Node2D" type="Node2D"]
-modulate = Color( 1, 1, 1, 0.00392157 )
 
 [node name="level" type="Label" parent="."]
 margin_left = 335.0
@@ -203,16 +205,20 @@ __meta__ = {
 }
 
 [node name="left" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="leftwall" type="CollisionShape2D" parent="left"]
+visible = false
 position = Vector2( -30, 316.101 )
 rotation = 1.5708
 shape = SubResource( 9 )
 one_way_collision = true
 
 [node name="right" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="leftwall" type="CollisionShape2D" parent="right"]
+visible = false
 position = Vector2( 750, 316.101 )
 rotation = -1.5708
 shape = SubResource( 9 )
@@ -233,9 +239,27 @@ text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="leftmove" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2( 7.461, 3.92757 )
+scale = Vector2( 344.473, 1067.5 )
+normal = ExtResource( 15 )
+script = ExtResource( 13 )
+
+[node name="rightmove" type="TouchScreenButton" parent="."]
+visible = false
+position = Vector2( 354.698, 4.48984 )
+scale = Vector2( 362.433, 1069.58 )
+normal = ExtResource( 15 )
+script = ExtResource( 14 )
 [connection signal="fspawn" from="screen" to="screen" method="_on_screen_fspawn"]
 [connection signal="respawn" from="screen" to="screen" method="_on_screen_respawn"]
 [connection signal="score_changed" from="screen" to="score" method="_on_screen_score_changed"]
 [connection signal="timeout" from="Timer" to="screen" method="_on_Timer_timeout"]
 [connection signal="pressed" from="start" to="start" method="_on_start_pressed"]
 [connection signal="button_down" from="shop" to="shop" method="_on_shop_button_down"]
+[connection signal="pressed" from="leftmove" to="leftmove" method="_on_leftmove_pressed"]
+[connection signal="released" from="leftmove" to="leftmove" method="_on_leftmove_released"]
+[connection signal="pressed" from="rightmove" to="rightmove" method="_on_rightmove_pressed"]
+[connection signal="released" from="rightmove" to="rightmove" method="_on_rightmove_released"]

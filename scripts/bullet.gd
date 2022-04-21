@@ -17,7 +17,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _on_Area2D_body_entered(body):
 	body.hp -= round(0.5*(damage * damage))
-	body.get_node("Label").set_text(str(body.hp))
+	body.get_node("Label").set_text(Globalvariables.enemyvalue(body.hp))
 	queue_free()
 	if body.hp < 1:
 		body.set_physics_process(false)
