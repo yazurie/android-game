@@ -84,8 +84,8 @@ func checkaffordable1():
 
 func _on_damage_pressed():
 	if $damage.pressed:
-		var damage = round(0.25*(0.25*(values.damagelvl * values.damagelvl)) + values.damagelvl)
-		var nextdamage = round(0.25*(0.25*((values.damagelvl + 1) * (values.damagelvl + 1)))+ (values.damagelvl + 1))
+		var damage = round(0.5*((0.25*values.damagelvl)*(0.25*values.damagelvl)) + values.damagelvl)
+		var nextdamage = round(0.5*((0.25*(values.damagelvl + 1))*(0.25*(values.damagelvl + 1))) + (values.damagelvl + 1))
 		var cost =5*(values.damagelvl * values.damagelvl)
 		
 		$damage.texture_normal = load("res://assets/image/more info background.png")
@@ -149,8 +149,8 @@ func _on_buydamage_button_down():
 	if Globalvariables.savegame_data.Coins >= 5*(values.damagelvl * values.damagelvl):
 		values.Coins -= 5*(values.damagelvl * values.damagelvl)
 		values.damagelvl += 1
-		var damage = round(0.25*(0.25*(values.damagelvl * values.damagelvl)) + values.damagelvl)
-		var nextdamage = round(0.25*(0.25*((values.damagelvl + 1) * (values.damagelvl + 1)))+ (values.damagelvl + 1))
+		var damage = round(0.5*((0.25*values.damagelvl)*(0.25*values.damagelvl)) + values.damagelvl)
+		var nextdamage = round(0.5*((0.25*(values.damagelvl + 1))*(0.25*(values.damagelvl + 1))) + (values.damagelvl + 1))
 		var cost = 5*(values.damagelvl * values.damagelvl)
 		$damage/damagetext.set_text("Increase the \ndamage of your \nbullets\nCurrent Level: "+ Globalvariables.smallvalue(values.damagelvl)+ "\nChange:\n"+Globalvariables.smallvalue(damage) + " -> "+ Globalvariables.smallvalue(nextdamage)+"\nPrice: " + Globalvariables.smallvalue(cost) + " Coins")
 		get_node("Coins/Label").set_text(Globalvariables.smallvalue(values.Coins))

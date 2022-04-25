@@ -7,7 +7,7 @@ var BumperHp
 var start = false
 var level
 var time = 9
-
+var bonus
 
 
 
@@ -33,7 +33,7 @@ var savegame_data = {
 
 
 func _ready():
-	
+	bonus = 1
 	level = savegame_data.startlevel - 1
 	BumperHp =  0.25 *(savegame_data.startBumpHpLvl * savegame_data.startBumpHpLvl)
 

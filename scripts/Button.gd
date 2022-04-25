@@ -42,6 +42,8 @@ func _on_buttontexture_pressed():
 			
 			
 			get_parent().Score -= Globalvariables.savegame_data.penaltylevel * pow(2,Globalvariables.savegame_data.hplevel -1)
+			Globalvariables.bonus = 1
+			get_parent().get_parent().get_node("score/bonus").set_text(str(Globalvariables.bonus)+"x")
 			get_parent().get_parent().get_node("score").set_text(Globalvariables.smallvalue(get_parent().Score))
  
 
@@ -53,7 +55,9 @@ func _on_Button_won():
 			i.queue_free()
 		else:
 			target = i
-			get_parent().Score += pow(2,Globalvariables.savegame_data.hplevel -1) 
+			get_parent().Score += pow(2,Globalvariables.savegame_data.hplevel -1) * Globalvariables.bonus
+			Globalvariables.bonus += 0.05
+			get_parent().get_parent().get_node("score/bonus").set_text(str(Globalvariables.bonus)+"x")
 			get_parent().emit_signal("score_changed")
 			get_parent().changecolor = target
 			get_parent().dochange = true

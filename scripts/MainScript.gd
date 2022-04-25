@@ -25,6 +25,7 @@ signal score_changed
 
 func _ready():
 	Globalvariables.save_data()
+	Globalvariables.bonus = 1
 	
 	get_parent().modulate.a = 0.1
 	if Globalvariables.savegame_data.highestlevel < Globalvariables.level:
