@@ -24,15 +24,28 @@ signal fspawn
 signal score_changed
 
 func _ready():
+	Globalvariables.bonus = 1
+	Globalvariables.save_data()
+	
 	get_parent().modulate.a = 0.1
 	if Globalvariables.savegame_data.highestlevel < Globalvariables.level:
 		Globalvariables.savegame_data.highestlevel = Globalvariables.level
+	if Globalvariables.level < Globalvariables.savegame_data.startlevel:
+		Globalvariables.level = Globalvariables.savegame_data.startlevel - 1
+	
+	
 	if Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel > Globalvariables.savegame_data.mintime:
-		get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel
+		if Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel < 15:
+			get_parent().get_node("Timer").wait_time = Globalvariables.time - Globalvariables.level + Globalvariables.savegame_data.timepenaltylevel
+		else:
+			get_parent().get_node("Timer").wait_time =  15
 	else:
 		get_parent().get_node("Timer").wait_time = Globalvariables.savegame_data.mintime
-		
+	
+	
+	
 	Globalvariables.level += 1
+	
 	
 	fspawn()
 	spawn(50)
@@ -133,7 +146,8 @@ func _on_Timer_timeout():              #ENDS PHASE 1
 	var bump_instance = bump.instance()
 	bump_instance.position = Vector2(350, 1350)
 	add_child(bump_instance)
-	
+	get_parent().get_node("leftmove").visible = true
+	get_parent().get_node("rightmove").visible = true
 
 
 func _on_screen_fspawn():

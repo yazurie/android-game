@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=2]
@@ -21,12 +21,15 @@ size = 64
 font_data = ExtResource( 10 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 200
+size = 100
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 38
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 128
-use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -71,7 +74,7 @@ grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.156863, 0.647059, 0.921569, 1 )
-text = "0"
+text = "1"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,13 +93,28 @@ grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0431373, 0.784314, 0.627451, 1 )
-text = "0
-"
+text = "0"
 align = 1
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="bonus" type="Label" parent="score"]
+visible = false
+anchor_left = 0.469
+anchor_top = -0.011
+anchor_right = 0.469
+anchor_bottom = -0.011
+margin_left = -21.932
+margin_top = -18.545
+margin_right = 22.068
+margin_bottom = 12.455
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = SubResource( 11 )
+text = "1x"
+align = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -105,14 +123,14 @@ one_shot = true
 [node name="Time" type="Label" parent="."]
 visible = false
 margin_left = 315.0
-margin_top = 665.0
+margin_top = 600.0
 margin_right = 445.0
-margin_bottom = 872.0
+margin_bottom = 807.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.2, 0.756863, 0.709804, 1 )
-text = "10
+text = "4
 "
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,10 +141,10 @@ stream = ExtResource( 7 )
 
 [node name="start" type="Button" parent="."]
 pause_mode = 2
-margin_left = 1.0
-margin_top = -100.0
-margin_right = 729.0
-margin_bottom = 1170.0
+margin_left = 0.603149
+margin_top = -102.778
+margin_right = 728.603
+margin_bottom = 1167.22
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_color_hover = Color( 0, 0.545098, 0.827451, 1 )

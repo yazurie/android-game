@@ -12,21 +12,21 @@ var hpmultiplier = 1
 
 
 func _ready():
-	$shootdelay.wait_time = 0.6 - (float(Globalvariables.savegame_data.shootdelaylvl) / 10)
-	
-	if Globalvariables.BumperHp <= 0:
-		Globalvariables.BumperHp = 5
-	$Label.set_text(str(Globalvariables.BumperHp))
+	$shootdelay.wait_time = 0.7 - (float(Globalvariables.savegame_data.shootdelaylvl) / 10)
+	if Globalvariables.BumperHp < 0.25*(Globalvariables.savegame_data.startBumpHpLvl*Globalvariables.savegame_data.startBumpHpLvl):
+		
+		Globalvariables.BumperHp = 0.25*(Globalvariables.savegame_data.startBumpHpLvl*Globalvariables.savegame_data.startBumpHpLvl)
+	$Label.set_text(Globalvariables.Bumpervalue(Globalvariables.BumperHp))
 func _physics_process(_delta):
 	
 	movement()
 	
-	if position.x < 146:
-		position.x = 146
-	if position.x > 572:
-		position.x = 572
+	if position.x < 18:
+		position.x = 18
+	if position.x > 700:
+		position.x = 700
 	if spawn == true:
-		position = lerp(position, Vector2(350, 1050), 0.05)
+		position = lerp(position, Vector2(position.x, 1050), 0.05)
 	
 	if position.y < 1051.5:
 		spawn = false
@@ -76,7 +76,7 @@ func _on_HpUp_timeout():
 			Globalvariables.start = false
 			Globalvariables.level = Globalvariables.savegame_data.startlevel - 1
 			get_tree().reload_current_scene()
-	$Label.set_text(Globalvariables.smallvalue(Globalvariables.BumperHp))
+	$Label.set_text(Globalvariables.Bumpervalue(Globalvariables.BumperHp))
 	get_parent().get_parent().get_node("score").set_text(str(round(get_parent().Score)))
 	
 	if get_parent().Score == 0:
@@ -84,7 +84,7 @@ func _on_HpUp_timeout():
 		
 		
 		
-		$Label.set_text(Globalvariables.smallvalue(Globalvariables.BumperHp))
+		$Label.set_text(Globalvariables.Bumpervalue(Globalvariables.BumperHp))
 		
 		get_parent().get_parent().get_node("score").queue_free()
 		$Label/HpUp.stop()
@@ -94,8 +94,6 @@ func _on_HpUp_timeout():
 
 
 func _on_spawnbutton_timeout():
-	get_parent().get_parent().get_node("leftmove").visible = true
-	get_parent().get_parent().get_node("rightmove").visible = true
 	$spawnbutton.stop()
 	$shootdelay.start()
 	spawnenemy()
@@ -117,15 +115,18 @@ func _on_shootdelay_timeout():
 
 
 func _on_Area2D_body_entered(body):
+	body.motion.y = body.jump
 	Globalvariables.BumperHp -= body.damage
+	Globalvariables.BumperHp = round(Globalvariables.BumperHp)
 	if Globalvariables.BumperHp < 1:
 		Globalvariables.level = Globalvariables.savegame_data.startlevel - 1
 		Globalvariables.start = false
 		get_tree().reload_current_scene()
-	$Label.set_text(str(Globalvariables.BumperHp))
+	$Label.set_text(Globalvariables.Bumpervalue(Globalvariables.BumperHp))
 	
 
 func spawnenemy():
+	
 	var enemy = load("res://scenes/enemy.tscn").instance()
 	enemy.position = Vector2(randi() % 350 + 150,randi() % 450)
 	enemy.motion.x = randi() % 400 + 300

@@ -9,6 +9,7 @@ var active = true
 var target
 var targpos
 var moving
+ 
 signal won
 
 
@@ -38,25 +39,28 @@ func _on_buttontexture_pressed():
 			
 			emit_signal("won")
 		else:
-			get_parent().Score -= Globalvariables.savegame_data.penaltylevel * Globalvariables.savegame_data.hplevel
+			Globalvariables.bonus = 1
+			get_parent().get_parent().get_node("score/bonus").set_text(str(Globalvariables.bonus) + "x")
+			get_parent().Score -= Globalvariables.savegame_data.penaltylevel * pow(2,Globalvariables.savegame_data.hplevel -1)
 			get_parent().get_parent().get_node("score").set_text(Globalvariables.smallvalue(get_parent().Score))
  
 
 
 
 func _on_Button_won():
-	print("yeet")
 	for i in get_parent().get_children():
 		if i.position.y > top or i.get_node("buttontexture").texture_normal != get_parent().colorM:
 			i.queue_free()
 		else:
 			target = i
-			get_parent().Score += 1 * Globalvariables.savegame_data.hplevel
+			get_parent().Score += pow(2,Globalvariables.savegame_data.hplevel -1) * Globalvariables.bonus
 			get_parent().emit_signal("score_changed")
 			get_parent().changecolor = target
 			get_parent().dochange = true
 			get_parent().get_parent().get_node("click").play()
 			move = true
+			Globalvariables.bonus += 0.1
+			get_parent().get_parent().get_node("score/bonus").set_text(str(Globalvariables.bonus) + "x")
 	
 	
 	get_parent().emit_signal("respawn")

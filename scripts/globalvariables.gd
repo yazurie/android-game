@@ -7,6 +7,7 @@ var BumperHp
 var start = false
 var level
 var time = 9
+var bonus = 1
 
 
 
@@ -16,6 +17,7 @@ var savegame_data = {
 	"shootdelayprice": 100,                      #beginn 100
 	"penaltylevelprice": 500,  
 	"mintimeprice": 100,
+	"hpmultiplycost": 100,
 	
 	"damagelvl": 1,                
 	"startBumpHpLvl": 1,                
@@ -26,16 +28,16 @@ var savegame_data = {
 	"penaltylevel": 5,                    #beginn 5
 	"timepenaltylevel": 1,                     #beginn 1
 	"mintime": 3,                              #beginn 3
-	 "startlevel": 1                        #beginn 1
+	 "startlevel": 1                   #beginn 1
 }                                   
 
 
 func _ready():
 	
 	level = savegame_data.startlevel - 1
-	BumperHp = savegame_data.startBumpHpLvl + (savegame_data.startBumpHpLvl * 4)
+	BumperHp =  0.25 *(savegame_data.startBumpHpLvl * savegame_data.startBumpHpLvl)
 	print(typeof(savegame_data.Coins))
-	#load_data()
+	load_data()
 
 
 func save_data():
@@ -57,6 +59,8 @@ func load_data():
 	
 func smallvalue(value):
 	var orgvalue = value
+	if orgvalue < 1000:
+		value = stepify(value, 0.01)
 	if orgvalue >= 1000 and orgvalue < 1000000:
 		value = str(stepify(float(value)/1000, 0.01)) + "K"
 	if orgvalue >= 1000000:
@@ -64,8 +68,19 @@ func smallvalue(value):
 	return str(value)
 func enemyvalue(value):
 	var orgvalue = value
+	if value < 1000:
+		value = stepify(value, 1)
 	if orgvalue >= 1000 and orgvalue < 1000000:
 		value = str(stepify(float(value)/1000, 1)) + "K"
 	if orgvalue >= 1000000:
 		value = str(stepify(float(value)/1000000, 1)) + "M"
+	return str(value)
+func Bumpervalue(value):
+	var orgvalue = value
+	if orgvalue < 1000:
+		value = stepify(value, 1)
+	if orgvalue >= 1000 and orgvalue < 1000000:
+		value = str(stepify(float(value)/1000, 0.1)) + "K"
+	if orgvalue >= 1000000:
+		value = str(stepify(float(value)/1000000, 0.1)) + "M"
 	return str(value)

@@ -12,7 +12,7 @@ func _ready():
 
 func _physics_process(_delta):
 	if left:
-		get_parent().get_node("screen/Bumper").motion.x = -300
+		get_parent().get_node("screen/Bumper").motion.x = -450
 
 
 

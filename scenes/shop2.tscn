@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/image/backpage.png" type="Texture" id=2]
@@ -6,41 +6,49 @@
 [ext_resource path="res://assets/image/shopframe.png" type="Texture" id=4]
 [ext_resource path="res://assets/image/exitshop.png" type="Texture" id=5]
 [ext_resource path="res://assets/image/buydamage.png" type="Texture" id=6]
-[ext_resource path="res://assets/image/shopdamage.png" type="Texture" id=7]
+[ext_resource path="res://assets/image/startlevel.png" type="Texture" id=7]
 [ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
 [ext_resource path="res://assets/Font/Gameplay.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/image/lessloss.png" type="Texture" id=11]
+[ext_resource path="res://assets/image/moretime.png" type="Texture" id=12]
+[ext_resource path="res://assets/image/morestarttime.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
 outline_size = 1
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 extra_spacing_top = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 10 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 32
-font_data = ExtResource( 1 )
-
 [sub_resource type="DynamicFont" id=6]
 size = 32
+extra_spacing_top = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=9]
 size = 64
 font_data = ExtResource( 1 )
 
@@ -80,7 +88,7 @@ margin_right = 150.0
 margin_bottom = 120.0
 rect_scale = Vector2( 2, 2 )
 toggle_mode = true
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -100,7 +108,7 @@ margin_left = 5.0
 margin_top = 10.0
 margin_right = 45.0
 margin_bottom = 24.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Decrease loss
 of hp when clicking 
 the wrong button"
@@ -113,7 +121,7 @@ margin_left = 34.5
 margin_top = 110.0
 margin_right = 91.5
 margin_bottom = 148.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Buy"
 uppercase = true
 __meta__ = {
@@ -126,7 +134,7 @@ margin_left = 9.0
 margin_top = 125.0
 margin_right = 113.0
 margin_bottom = 180.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 4 )
 text = "max level
  reached"
 __meta__ = {
@@ -139,9 +147,22 @@ margin_top = 145.0
 margin_right = 212.0
 margin_bottom = 183.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "less loss"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="lessloss"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 75.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 6 )
+text = "not enough
+   Coins"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,7 +174,7 @@ margin_right = 500.0
 margin_bottom = 200.0
 rect_scale = Vector2( 2, 2 )
 toggle_mode = true
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -163,6 +184,9 @@ margin_top = 120.0
 margin_right = 120.0
 margin_bottom = 170.0
 texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="moretimetext" type="Label" parent="moretime"]
 visible = false
@@ -170,7 +194,7 @@ margin_left = 5.0
 margin_top = 10.0
 margin_right = 45.0
 margin_bottom = 24.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,7 +204,7 @@ margin_left = 35.0
 margin_top = 110.0
 margin_right = 92.0
 margin_bottom = 148.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Buy"
 uppercase = true
 __meta__ = {
@@ -193,9 +217,22 @@ margin_top = 145.0
 margin_right = 212.0
 margin_bottom = 183.0
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "more time"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="moretime"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 119.0
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 6 )
+text = "not enough
+   Coins"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -207,7 +244,7 @@ margin_right = 230.0
 margin_bottom = 560.0
 rect_scale = Vector2( 2, 2 )
 toggle_mode = true
-texture_normal = ExtResource( 7 )
+texture_normal = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,7 +261,7 @@ margin_left = 5.0
 margin_top = 10.0
 margin_right = 45.0
 margin_bottom = 24.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Increase the 
 minimum time you 
 have to gain hp"
@@ -237,7 +274,7 @@ margin_left = 35.0
 margin_top = 110.0
 margin_right = 92.0
 margin_bottom = 148.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Buy"
 uppercase = true
 __meta__ = {
@@ -250,9 +287,22 @@ margin_top = 145.0
 margin_right = 242.8
 margin_bottom = 183.0
 rect_scale = Vector2( 0.49, 0.5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "minimum time"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="mintime"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 119.0
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 6 )
+text = "not enough
+   Coins"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -274,6 +324,9 @@ margin_top = 120.0
 margin_right = 120.0
 margin_bottom = 170.0
 texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="startleveltext" type="Label" parent="startlevel"]
 visible = false
@@ -281,7 +334,7 @@ margin_left = 5.0
 margin_top = 10.0
 margin_right = 45.0
 margin_bottom = 24.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Increase the
 level that your 
 starting to play in"
@@ -294,7 +347,7 @@ margin_left = 35.0
 margin_top = 110.0
 margin_right = 92.0
 margin_bottom = 148.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Buy"
 uppercase = true
 __meta__ = {
@@ -307,9 +360,22 @@ margin_top = 145.0
 margin_right = 252.0
 margin_bottom = 183.0
 rect_scale = Vector2( 0.47, 0.5 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 text = "start level"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nomoney" type="Label" parent="startlevel"]
+visible = false
+margin_left = 3.0
+margin_top = 125.0
+margin_right = 119.0
+margin_bottom = 166.0
+custom_fonts/font = SubResource( 6 )
+text = "not enough
+   Coins"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -320,7 +386,7 @@ margin_left = 4.75684
 margin_top = 117.137
 margin_right = 112.757
 margin_bottom = 143.137
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
 text = "beat level
 "
 __meta__ = {
@@ -335,7 +401,7 @@ margin_bottom = 43.2432
 grow_horizontal = 2
 grow_vertical = 2
 rect_scale = Vector2( 1.3, 1.3 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 8 )
 text = "8"
 align = 1
 __meta__ = {
@@ -366,7 +432,7 @@ margin_left = 41.0
 margin_top = -34.0
 margin_right = 81.0
 margin_bottom = -20.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -374,7 +440,11 @@ __meta__ = {
 [connection signal="button_down" from="exit2" to="." method="_on_exit2_button_down"]
 [connection signal="ready" from="exit2" to="." method="_on_exit2_ready"]
 [connection signal="pressed" from="lessloss" to="." method="_on_lessloss_pressed"]
+[connection signal="button_down" from="lessloss/buydlessloss" to="." method="_on_buydlessloss_button_down"]
 [connection signal="pressed" from="moretime" to="." method="_on_moretime_pressed"]
+[connection signal="button_down" from="moretime/buymoretime" to="." method="_on_buymoretime_button_down"]
 [connection signal="pressed" from="mintime" to="." method="_on_mintime_pressed"]
+[connection signal="button_down" from="mintime/buymintime" to="." method="_on_buymintime_button_down"]
 [connection signal="pressed" from="startlevel" to="." method="_on_startlevel_pressed"]
+[connection signal="button_down" from="startlevel/buystartlevel" to="." method="_on_buystartlevel_button_down"]
 [connection signal="button_down" from="backpage" to="." method="_on_backpage_button_down"]
