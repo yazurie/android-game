@@ -7,7 +7,7 @@ var BumperHp
 var start = false
 var level
 var time = 9
-var bonus = 1
+
 
 
 
@@ -19,16 +19,16 @@ var savegame_data = {
 	"mintimeprice": 100,
 	"hpmultiplycost": 100,
 	
-	"damagelvl": 1,                
-	"startBumpHpLvl": 1,                
-	"hplevel": 1,      
-	"shootdelaylvl": 1,   
+	"damagelvl": 37,                
+	"startBumpHpLvl": 42,                
+	"hplevel": 5,      
+	"shootdelaylvl": 5,   
 	
-	"penaltylevelC": 1,                   #beginn 1
-	"penaltylevel": 5,                    #beginn 5
+	"penaltylevelC": 3,                   #beginn 1
+	"penaltylevel": 3,                    #beginn 5
 	"timepenaltylevel": 1,                     #beginn 1
 	"mintime": 3,                              #beginn 3
-	 "startlevel": 1                   #beginn 1
+	 "startlevel": 48                 #beginn 1
 }                                   
 
 
@@ -36,7 +36,7 @@ func _ready():
 	
 	level = savegame_data.startlevel - 1
 	BumperHp =  0.25 *(savegame_data.startBumpHpLvl * savegame_data.startBumpHpLvl)
-	print(typeof(savegame_data.Coins))
+
 	load_data()
 
 

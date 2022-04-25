@@ -32,7 +32,6 @@ func _physics_process(_delta):
 		get_parent().get_node("Time").visible = true
 		get_parent().get_node("score").visible = true
 		get_parent().get_node("shop").visible = false
-		get_parent().get_node("score/bonus").visible = true
 		queue_free()
 
 func _on_start_pressed():

@@ -24,7 +24,6 @@ signal fspawn
 signal score_changed
 
 func _ready():
-	Globalvariables.bonus = 1
 	Globalvariables.save_data()
 	
 	get_parent().modulate.a = 0.1

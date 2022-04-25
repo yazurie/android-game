@@ -21,10 +21,10 @@ func _physics_process(_delta):
 	
 	movement()
 	
-	if position.x < 18:
-		position.x = 18
-	if position.x > 700:
-		position.x = 700
+	if position.x < 146:
+		position.x = 146
+	if position.x > 572:
+		position.x = 572
 	if spawn == true:
 		position = lerp(position, Vector2(position.x, 1050), 0.05)
 	
@@ -115,6 +115,7 @@ func _on_shootdelay_timeout():
 
 
 func _on_Area2D_body_entered(body):
+	
 	body.motion.y = body.jump
 	Globalvariables.BumperHp -= body.damage
 	Globalvariables.BumperHp = round(Globalvariables.BumperHp)

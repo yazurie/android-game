@@ -17,8 +17,7 @@ func _ready():
 	hp = int((0.5*(Globalvariables.level * Globalvariables.level) + 0.5* extra_hp)+1)
 	
 	
-	damage = int(hp / 10) + hp
-	hp *= 1000
+	damage = int(hp / 10) + Globalvariables.level
 	starthp = hp
 	$Label.set_text(Globalvariables.enemyvalue(hp))
 
@@ -50,6 +49,5 @@ func _physics_process(delta):
 
 func _on_DeadTimer_timeout():
 	modulate.a -= 0.3
-	print(modulate.a)
 	if modulate.a <= -1:
 		get_tree().reload_current_scene()
