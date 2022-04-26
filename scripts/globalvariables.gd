@@ -37,7 +37,8 @@ func _ready():
 	level = savegame_data.startlevel - 1
 	BumperHp =  0.25 *(savegame_data.startBumpHpLvl * savegame_data.startBumpHpLvl)
 
-	#load_data()
+	load_data()
+
 
 
 func save_data():
