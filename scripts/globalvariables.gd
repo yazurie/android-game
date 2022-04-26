@@ -13,7 +13,7 @@ var bonus
 
 var savegame_data = {
 	"highestlevel": 0,
-	"Coins": 0,
+	"Coins": 10000000,
 	"shootdelayprice": 100,                      #beginn 100
 	"penaltylevelprice": 500,  
 	"mintimeprice": 100,
@@ -22,7 +22,7 @@ var savegame_data = {
 	"damagelvl": 37,                
 	"startBumpHpLvl": 42,                
 	"hplevel": 5,      
-	"shootdelaylvl": 5,   
+	"shootdelaylvl": 1,   
 	
 	"penaltylevelC": 3,                   #beginn 1
 	"penaltylevel": 3,                    #beginn 5
@@ -37,7 +37,7 @@ func _ready():
 	level = savegame_data.startlevel - 1
 	BumperHp =  0.25 *(savegame_data.startBumpHpLvl * savegame_data.startBumpHpLvl)
 
-	load_data()
+	#load_data()
 
 
 func save_data():

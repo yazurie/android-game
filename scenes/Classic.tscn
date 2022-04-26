@@ -1,24 +1,24 @@
 [gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Font/flappyfont.TTF" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/Font/Neon.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scripts/start.gd" type="Script" id=4]
-[ext_resource path="res://scripts/MainScript.gd" type="Script" id=5]
-[ext_resource path="res://scripts/score.gd" type="Script" id=6]
-[ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=7]
-[ext_resource path="res://assets/Font/pixel.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://assets/image/coin.png" type="Texture" id=9]
-[ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://assets/image/shop.png" type="Texture" id=11]
-[ext_resource path="res://scripts/openshop.gd" type="Script" id=12]
-[ext_resource path="res://scripts/leftarr.gd" type="Script" id=13]
+[ext_resource path="res://assets/Font/pixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/Font/Gamer.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/Font/pixel font-7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/Font/Neon.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/sounds/click.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/image/transparency.png" type="Texture" id=7]
+[ext_resource path="res://assets/image/coin.png" type="Texture" id=8]
+[ext_resource path="res://assets/image/shop.png" type="Texture" id=9]
+[ext_resource path="res://scripts/leftarr.gd" type="Script" id=10]
+[ext_resource path="res://scripts/MainScript.gd" type="Script" id=11]
+[ext_resource path="res://scripts/start.gd" type="Script" id=12]
+[ext_resource path="res://scripts/score.gd" type="Script" id=13]
 [ext_resource path="res://scripts/rightarr.gd" type="Script" id=14]
-[ext_resource path="res://assets/image/transparency.png" type="Texture" id=15]
+[ext_resource path="res://scripts/openshop.gd" type="Script" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 10 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 100
@@ -26,42 +26,42 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 128
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 170
-font_data = ExtResource( 3 )
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 64
 outline_size = 1
-font_data = ExtResource( 8 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 80
 outline_size = 2
-font_data = ExtResource( 8 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 124
 outline_size = 2
-font_data = ExtResource( 8 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 48
 outline_size = 1
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 763.816, 27.7356 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 64
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -81,7 +81,7 @@ __meta__ = {
 }
 
 [node name="screen" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 11 )
 
 [node name="score" type="Label" parent="."]
 margin_left = 310.0
@@ -94,7 +94,7 @@ custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0431373, 0.784314, 0.627451, 1 )
 text = "0"
 align = 1
-script = ExtResource( 6 )
+script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,7 +135,7 @@ __meta__ = {
 }
 
 [node name="click" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 6 )
 
 [node name="start" type="Button" parent="."]
 pause_mode = 2
@@ -148,7 +148,7 @@ custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_color_hover = Color( 0, 0.545098, 0.827451, 1 )
 action_mode = 0
 flat = true
-script = ExtResource( 4 )
+script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -202,8 +202,8 @@ margin_top = 700.0
 margin_right = 355.0
 margin_bottom = 760.0
 rect_scale = Vector2( 2, 2 )
-texture_normal = ExtResource( 11 )
-script = ExtResource( 12 )
+texture_normal = ExtResource( 9 )
+script = ExtResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -242,7 +242,7 @@ one_way_collision = true
 
 [node name="coin" type="Sprite" parent="."]
 position = Vector2( 17.9639, 398.999 )
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="coin"]
 anchor_right = 0.871
@@ -260,14 +260,14 @@ __meta__ = {
 visible = false
 position = Vector2( 7.461, 3.92757 )
 scale = Vector2( 344.473, 1067.5 )
-normal = ExtResource( 15 )
-script = ExtResource( 13 )
+normal = ExtResource( 7 )
+script = ExtResource( 10 )
 
 [node name="rightmove" type="TouchScreenButton" parent="."]
 visible = false
 position = Vector2( 354.698, 4.48984 )
 scale = Vector2( 362.433, 1069.58 )
-normal = ExtResource( 15 )
+normal = ExtResource( 7 )
 script = ExtResource( 14 )
 [connection signal="fspawn" from="screen" to="screen" method="_on_screen_fspawn"]
 [connection signal="respawn" from="screen" to="screen" method="_on_screen_respawn"]

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TapTheColour"
-run/main_scene="res://scenes/screen.tscn"
+run/main_scene="res://scenes/selectmode.tscn"
 config/icon="res://assets/icon/icon.png"
 
 [autoload]

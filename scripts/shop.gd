@@ -25,7 +25,7 @@ func _physics_process(_delta):
 		blink = false
 
 func _on_TextureButton_button_down():
-	get_tree().change_scene("res://scenes/screen.tscn")
+	get_tree().change_scene("res://scenes/Classic.tscn")
 
 
 func _on_nextpage_button_down():
@@ -37,7 +37,7 @@ func _on_backpage_button_down():
 
 
 func _on_exit2_button_down():
-	get_tree().change_scene("res://scenes/screen.tscn")
+	get_tree().change_scene("res://scenes/Classic.tscn")
 
 #-----------------------------------------------------------------
 
@@ -59,7 +59,7 @@ func checkaffordable1():
 	else:
 		$hpmultiply/buyhpmultiply.texture_normal = load("res://assets/image/buydamage.png")
 	
-	if values.shootdelaylvl < 5:
+	if values.shootdelaylvl < 6:
 		if values.Coins >= values.shootdelayprice:
 			$shootdelay/buyshootdelay.texture_normal = load("res://assets/image/enoughmoney.png")
 		else:
@@ -126,7 +126,7 @@ func _on_shootdelay_pressed():
 	if $shootdelay.pressed:
 		$shootdelay.texture_normal = load("res://assets/image/more info background.png")
 		$shootdelay/shootdelaytext.visible = true
-		if values.shootdelaylvl < 5:
+		if values.shootdelaylvl < 6:
 			var shootdelay = 0.7 - (float(values.shootdelaylvl) / 10 )
 			var nextshootdelay = 0.7 - (float(values.shootdelaylvl + 1) /10 )
 			var cost = values.shootdelayprice
@@ -196,7 +196,7 @@ func _on_buyhpmultiply_button_down():
 		$hpmultiply/nomoney.visible = true
 
 func _on_buyshootdelay_button_down():
-	if values.shootdelaylvl < 5:
+	if values.shootdelaylvl < 6:
 		if values.Coins >= values.shootdelayprice:
 			values.Coins -= values.shootdelayprice
 			values.shootdelayprice = values.shootdelayprice * 10

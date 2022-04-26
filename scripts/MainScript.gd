@@ -22,7 +22,7 @@ var Game1 = true
 signal respawn
 signal fspawn
 signal score_changed
-
+#text
 func _ready():
 	Globalvariables.save_data()
 	Globalvariables.bonus = 1
