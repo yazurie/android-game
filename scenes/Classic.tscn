@@ -63,7 +63,7 @@ extents = Vector2( 763.816, 27.7356 )
 size = 64
 font_data = ExtResource( 3 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Game1" type="Node2D"]
 
 [node name="level" type="Label" parent="."]
 margin_left = 335.0
@@ -113,6 +113,9 @@ grow_vertical = 2
 custom_fonts/font = SubResource( 3 )
 text = "1x"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -139,10 +142,10 @@ stream = ExtResource( 6 )
 
 [node name="start" type="Button" parent="."]
 pause_mode = 2
-margin_left = 0.603149
-margin_top = -102.778
-margin_right = 728.603
-margin_bottom = 1167.22
+margin_left = 1.0
+margin_top = -103.0
+margin_right = 729.0
+margin_bottom = 1086.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0, 0.545098, 0.827451, 1 )
 custom_colors/font_color_hover = Color( 0, 0.545098, 0.827451, 1 )

@@ -19,7 +19,7 @@ var savegame_data = {
 	"mintimeprice": 100,
 	"hpmultiplycost": 100,
 	
-	"damagelvl": 37,                
+	"damagelvl": 37000,                
 	"startBumpHpLvl": 42,                
 	"hplevel": 5,      
 	"shootdelaylvl": 1,   
